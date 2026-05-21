@@ -1,8 +1,9 @@
 # macOS
 .DS_Store
 
-# Local tooling / editor
-.claude/
+# Local / personal — not shared (skills and .claude/settings.json ARE committed)
+.claude/settings.local.json
+CLAUDE.local.md
 *.log
 
 # Dependencies (none currently — static site)
