@@ -4,12 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Single-page editorial marketing website for Southbury Homes (a Greater Toronto Area luxury homebuilder), built by Stellr Media. Hand-written static site — no build step, no package manager, no framework.
+Multi-page editorial marketing website for Southbury Homes (a Greater Toronto Area luxury homebuilder), built by Stellr Media. Hand-written static site — no build step, no package manager, no framework.
 
-- `index.html` — all markup, one page
+- `index.html` — home: preloader + video hero, then teaser/gateway sections linking to inner pages
+- Inner pages (flat at repo root): `communities.html`, `decor-studio.html`, `gallery.html`, `about.html` (Mission + Care + Team), `packages.html` (Harmony + Comfort), `building-your-home.html`, `seasonal-maintenance.html`, `contact.html`
+- `partials/_chrome.html` — **reference snippet, never loaded.** The header/footer/mobile-menu markup is duplicated into every page; edit it here first, then copy into each page so the copies don't drift
 - `css/style.css` — all styles; design tokens (colors, fonts, spacing) live in `:root`
-- `js/main.js` — Lenis smooth-scroll + GSAP scroll animation system
+- `js/main.js` — Lenis smooth-scroll + GSAP scroll animation system (also: dropdown nav, mobile accordion, active-nav-state, preloader)
 - `assets/img/`, `assets/video/` — media
+
+### Multi-page conventions
+
+- **Pages live at the repo root** (not a subdir) because asset paths are relative without a leading slash (`css/style.css`, `js/main.js`, `assets/...`). A subdir would 404 them.
+- **Shared chrome is duplicated, not injected.** No build/templating — keep header/footer/menu identical across pages by copying from `partials/_chrome.html`.
+- **Preloader is home-only.** Inner pages omit the `#preloader` block; `runPreloader()` in `main.js` detects its absence and builds the scene immediately (no replay on navigation).
+- **Nav is grouped dropdowns** (Communities ▾ / Design ▾ / Homeowners ▾ / About ▾ / Contact). Cross-page links navigate natively; `data-scroll-link` is only for same-page `#anchors`. Inner-page sections that are dropdown targets carry `id`s (e.g. `#mission`, `#harmony`) and get `scroll-margin-top` so native hash jumps clear the fixed header.
+- **Active nav state** is set by JS in `main.js` (matches `location.pathname`) — do not hand-mark it.
+- **Inner pages have no video hero;** they use a `.page-hero` title band, and `main.js` keeps the nav `--solid` when no `.hero` is present.
 
 ## Commands
 
@@ -20,7 +31,7 @@ There is no build, test, or lint step.
 
 ## Libraries
 
-GSAP 3.12.5 + ScrollTrigger and Lenis 1.0.42 load from CDN `<script>` tags in `index.html`; fonts from Google Fonts. Keep this a zero-dependency static site — do not add `package.json`, npm dependencies, or a bundler.
+GSAP 3.12.5 + ScrollTrigger and Lenis 1.0.42 load from CDN `<script>` tags on every page; fonts from Google Fonts. Keep this a zero-dependency static site — do not add `package.json`, npm dependencies, or a bundler.
 
 ## Animation system
 
@@ -37,10 +48,6 @@ Scroll animations in `js/main.js` are driven by `data-*` attributes in the HTML.
 **Critical gotcha:** CSS initial animation states are gated on `html.anim` (added by an inline `<head>` script unless `prefers-reduced-motion`). Never give an element a CSS `transform` with a percentage translate (e.g. `translateY(110%)`) if GSAP later animates its `yPercent` — the browser resolves the `%` to a pixel matrix, GSAP reads it back as a pixel `y`, and the element ends up double-offset (this exact bug hid the hero headline). Set such initial offsets in JS via `gsap.set()`, not CSS.
 
 `js/main.js` includes a full static fallback for `prefers-reduced-motion` — keep it working when adding animations.
-
-## Preview mode
-
-`<body class="preview">` gates the public site to Hero → Philosophy → Craftsmanship → Break, plus the Footer. All other sections — and any nav/footer link pointing to them — stay in the markup but are hidden via the `PREVIEW MODE` block in `css/style.css`. Remove `class="preview"` from the `<body>` tag to publish the full site.
 
 ## Assets
 

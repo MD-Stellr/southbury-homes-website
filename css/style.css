@@ -227,19 +227,68 @@ em.word { font-style: italic; }
 /* menu overlay is dark — keep the white mark visible while it is open */
 body.menu-open .logo__img--light { opacity: 1; }
 body.menu-open .logo__img--dark { opacity: 0; }
-
-.nav__links { display: flex; gap: clamp(1.4rem, 2.6vw, 2.9rem); }
-.nav__links a {
-  position: relative; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--bone); padding-block: 0.4rem; transition: color 0.55s var(--ease), opacity 0.3s;
+/* while the menu is open the bar floats over the dark overlay — drop its solid
+   background/blur/border so there is no light band across the top */
+body.menu-open .nav,
+body.menu-open .nav--solid {
+  background: transparent;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  border-bottom-color: transparent;
+  box-shadow: none;
 }
-.nav--solid .nav__links a { color: var(--ink); }
-.nav__links a::after {
+
+.nav__links { display: flex; align-items: center; gap: clamp(1.1rem, 2.2vw, 2.6rem); }
+.nav__item { position: relative; }
+
+/* top-level triggers (button) + plain links share one look */
+.nav__top {
+  position: relative; display: inline-flex; align-items: center; gap: 0.45em;
+  font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
+  color: var(--bone); padding-block: 0.4rem;
+  transition: color 0.55s var(--ease), opacity 0.3s;
+}
+.nav--solid .nav__top { color: var(--ink); }
+.nav__top::after {
   content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
   background: currentColor; transform: scaleX(0); transform-origin: left;
   transition: transform 0.45s var(--ease);
 }
-.nav__links a:hover::after { transform: scaleX(1); }
+.nav__top:hover::after,
+.nav__item:hover .nav__top::after,
+.nav__item:focus-within .nav__top::after,
+.nav__item.is-open .nav__top::after { transform: scaleX(1); }
+/* current page */
+.nav__top--link.is-active::after,
+.nav__item.is-active .nav__top::after { transform: scaleX(1); background: var(--bronze); }
+
+.nav__caret {
+  width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor; opacity: 0.65; margin-top: 0.15em;
+  transition: transform 0.4s var(--ease);
+}
+.nav__item.is-open .nav__caret { transform: rotate(180deg); }
+
+/* dropdown panel — floats off the bar, so it carries its own solid bg */
+.nav__panel {
+  position: absolute; top: 100%; left: -1.1rem; min-width: 13rem;
+  background: var(--bone); border: 1px solid var(--line-soft);
+  box-shadow: 0 28px 60px -34px rgba(28,24,16,0.45);
+  padding: 0.55rem 0; display: flex; flex-direction: column;
+  opacity: 0; visibility: hidden; transform: translateY(8px); pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+}
+.nav__item:hover .nav__panel,
+.nav__item:focus-within .nav__panel,
+.nav__item.is-open .nav__panel {
+  opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+}
+.nav__panel a {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+  padding: 0.62rem 1.4rem; white-space: nowrap;
+  transition: color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.nav__panel a:hover { color: var(--ink); background: var(--paper); }
+.nav__panel a.is-active { color: var(--bronze-deep); }
 
 .nav__aside { display: flex; align-items: center; gap: 1.6rem; }
 .nav__phone {
@@ -277,21 +326,43 @@ body.menu-open .nav__toggle span { background: var(--bone); }
 }
 body.menu-open .menu { clip-path: inset(0 0 0% 0); visibility: visible; }
 .menu__nav { display: flex; flex-direction: column; }
-.menu__nav a {
-  font-family: var(--font-display); font-size: clamp(2rem, 9vw, 3.4rem); font-weight: 400;
-  padding-block: 0.35rem; display: flex; align-items: baseline; gap: 1rem;
+.menu__nav > * {
   border-bottom: 1px solid rgba(243,239,230,0.12);
   opacity: 0; transform: translateY(20px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s;
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
 }
-body.menu-open .menu__nav a { opacity: 1; transform: translateY(0); }
-body.menu-open .menu__nav a:nth-child(1) { transition-delay: 0.16s; }
-body.menu-open .menu__nav a:nth-child(2) { transition-delay: 0.22s; }
-body.menu-open .menu__nav a:nth-child(3) { transition-delay: 0.28s; }
-body.menu-open .menu__nav a:nth-child(4) { transition-delay: 0.34s; }
-body.menu-open .menu__nav a:nth-child(5) { transition-delay: 0.40s; }
-body.menu-open .menu__nav a:nth-child(6) { transition-delay: 0.46s; }
-.menu__nav a:hover { color: var(--bronze); }
+body.menu-open .menu__nav > * { opacity: 1; transform: translateY(0); }
+body.menu-open .menu__nav > *:nth-child(1) { transition-delay: 0.16s; }
+body.menu-open .menu__nav > *:nth-child(2) { transition-delay: 0.22s; }
+body.menu-open .menu__nav > *:nth-child(3) { transition-delay: 0.28s; }
+body.menu-open .menu__nav > *:nth-child(4) { transition-delay: 0.34s; }
+body.menu-open .menu__nav > *:nth-child(5) { transition-delay: 0.40s; }
+
+.menu__top, .menu__link {
+  font-family: var(--font-display); font-size: clamp(1.8rem, 7.5vw, 3rem); font-weight: 400;
+  padding-block: 0.42rem; display: flex; align-items: center; gap: 1rem; width: 100%;
+  color: var(--bone); text-align: left; transition: color 0.3s;
+}
+.menu__top:hover, .menu__link:hover { color: var(--bronze); }
+.menu__caret {
+  margin-left: auto; width: 0; height: 0;
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid currentColor; opacity: 0.65;
+  transition: transform 0.4s var(--ease);
+}
+.menu__group.is-open .menu__caret { transform: rotate(180deg); }
+.menu__sub {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease);
+}
+.menu__group.is-open .menu__sub { grid-template-rows: 1fr; }
+.menu__sub-list { overflow: hidden; min-height: 0; display: flex; flex-direction: column; }
+.menu__sub-list a {
+  font-family: var(--font-sans); font-size: 0.98rem; letter-spacing: 0.08em;
+  color: rgba(243,239,230,0.68); padding: 0.5rem 0 0.5rem 2.4rem; transition: color 0.3s;
+}
+.menu__sub-list a:last-child { padding-bottom: 1.1rem; }
+.menu__sub-list a:hover, .menu__sub-list a.is-active { color: var(--bronze); }
 .menu__index { font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--bronze); }
 .menu__foot {
   margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 1.6rem;
@@ -692,6 +763,7 @@ body.menu-open .menu__nav a:nth-child(6) { transition-delay: 0.46s; }
   transition: color 0.3s;
 }
 .footer__col a:hover { color: var(--bone); }
+.footer__col a.is-active { color: var(--bronze); }
 .footer__addr { color: rgba(243,239,230,0.5); }
 
 .footer__base {
@@ -768,29 +840,168 @@ body.menu-open .menu__nav a:nth-child(6) { transition-delay: 0.46s; }
 }
 
 /* =========================================================
-   PREVIEW MODE
-   Gates the public preview to: Hero -> Philosophy -> Craftsmanship
-   -> Break, plus the Footer. Every other section stays in the
-   markup but is hidden, along with any nav/footer link that
-   points to a hidden section. To publish the full site, remove
-   class="preview" from the <body> tag in index.html.
+   INNER-PAGE COMPONENTS (multi-page)
    ========================================================= */
-body.preview #developments,
-body.preview #programs,
-body.preview #care,
-body.preview #leadership,
-body.preview #contact { display: none; }
 
-/* Nav + mobile-menu links stay visible so the client sees the full menu.
-   Their target sections are still gated, so main.js makes these links inert
-   for now. Links inside the hero, feature, and footer would point nowhere
-   useful in this preview, so those stay hidden. */
-body.preview .hero__actions a[href="#developments"],
-body.preview .feature__text a[href="#care"],
-body.preview .footer__col a[href="#developments"],
-body.preview .footer__col a[href="#programs"],
-body.preview .footer__col a[href="#leadership"],
-body.preview .footer__col a[href="#contact"] { display: none; }
+/* anchored sections clear the fixed header on native #hash jumps */
+section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
 
-body.preview .footer__grid { grid-template-columns: repeat(2, 1fr); }
-body.preview .footer__col--developments { display: none; }
+/* ---------- PAGE HERO (inner-page title band; replaces video hero) ---------- */
+.page-hero {
+  background: var(--bone);
+  padding-top: clamp(8rem, 13vw, 11.5rem);
+  padding-bottom: clamp(2.4rem, 5vw, 4rem);
+}
+.page-hero__title { max-width: 20ch; }
+.page-hero__lead {
+  margin-top: 1.8rem; max-width: 56ch;
+  font-size: clamp(1.04rem, 1.2vw, 1.22rem); line-height: 1.7;
+  color: var(--ink-soft); font-weight: 300;
+}
+
+/* ---------- TIMELINE (Building Your Home — numbered steps) ---------- */
+.timeline { border-top: 1px solid var(--line); }
+.step {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: clamp(1.4rem, 3vw, 3rem);
+  padding-block: clamp(1.7rem, 3vw, 2.6rem);
+  border-bottom: 1px solid var(--line);
+}
+.step__num {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1; color: var(--bronze);
+}
+.step__body h3 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.15;
+  letter-spacing: -0.01em; margin-bottom: 0.6rem;
+}
+.step__body p { font-size: 0.98rem; line-height: 1.72; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
+
+/* ---------- SEASONS (Seasonal Maintenance) ---------- */
+.seasons { display: flex; flex-direction: column; gap: clamp(2.6rem, 5vw, 4.5rem); }
+.season { border-top: 1px solid var(--line); padding-top: clamp(1.8rem, 3vw, 2.6rem); }
+.season__head { display: flex; align-items: baseline; gap: 1.1rem; margin-bottom: clamp(1.6rem, 3vw, 2.4rem); flex-wrap: wrap; }
+.season__name {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem); letter-spacing: -0.01em;
+}
+.season__note { font-size: 0.96rem; color: var(--ink-soft); font-weight: 300; }
+.season__cats {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.6rem, 3vw, 2.6rem) clamp(2rem, 4vw, 3.5rem);
+}
+.cat__title {
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bronze-deep); margin-bottom: 0.95rem;
+}
+.cat__list li {
+  font-size: 0.94rem; line-height: 1.5; color: var(--ink-soft); font-weight: 300;
+  position: relative; padding-left: 1.4rem; margin-bottom: 0.6rem;
+}
+.cat__list li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 0.55rem; height: 1px; background: var(--bronze);
+}
+
+/* ---------- GALLERY (masonry of photo-ratio tiles; empty until photos arrive) ---------- */
+.gallery { column-count: 3; column-gap: clamp(0.5rem, 1vw, 0.9rem); }
+.gallery__item {
+  position: relative; overflow: hidden; width: 100%;
+  margin-bottom: clamp(0.5rem, 1vw, 0.9rem);
+  break-inside: avoid; -webkit-column-break-inside: avoid;
+  background: linear-gradient(135deg, var(--line-soft) 0%, var(--paper) 100%);
+  border: 1px solid var(--line-soft);
+}
+.gallery__item:nth-child(even) { background: linear-gradient(135deg, var(--paper) 0%, var(--line-soft) 100%); }
+/* faint diamond frame so empty tiles read as intentional placeholders (sits behind any photo) */
+.gallery__item::after {
+  content: ""; position: absolute; z-index: 0; top: 50%; left: 50%;
+  width: 30px; height: 30px; transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid var(--line); opacity: 0.5;
+  transition: opacity 0.5s var(--ease), transform 0.6s var(--ease);
+}
+.gallery__item:hover::after { opacity: 0.85; transform: translate(-50%, -50%) rotate(45deg) scale(1.18); }
+/* drop an <img> inside a tile later — it covers the placeholder mark automatically */
+.gallery__item img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.gallery__item:hover img { transform: scale(1.05); }
+
+/* photographic aspect ratios — nothing skinnier than 4:3 */
+.g-portrait { aspect-ratio: 4 / 5; }
+.g-tall     { aspect-ratio: 3 / 4; }
+.g-square   { aspect-ratio: 1 / 1; }
+.g-land     { aspect-ratio: 4 / 3; }
+
+.coming-state {
+  border: 1px solid var(--line); background: var(--paper);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem); text-align: center;
+}
+.coming-state .eyebrow { justify-content: center; }
+.coming-state h3 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.1; margin-bottom: 1rem;
+}
+.coming-state p { color: var(--ink-soft); font-weight: 300; max-width: 50ch; margin-inline: auto; }
+.coming-state .link-underline { margin-top: 1.8rem; }
+
+/* ---------- MAP BLOCK (static; no third-party iframe) ---------- */
+.map-block {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--line); background: var(--paper);
+  min-height: clamp(16rem, 34vw, 24rem);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1rem; text-align: center; padding: 2rem;
+}
+.map-block::before {
+  content: ""; position: absolute; inset: 0; opacity: 0.55;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.map-block > * { position: relative; }
+.map-block__pin {
+  width: 16px; height: 16px; border-radius: 50% 50% 50% 0;
+  background: var(--bronze); transform: rotate(-45deg);
+  box-shadow: 0 8px 18px -6px rgba(111,88,54,0.65);
+}
+.map-block__addr { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.4; }
+
+/* ---------- GATEWAY GRID (home teasers into inner pages) ---------- */
+.gateways { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 2.5vw, 2.2rem); }
+.gateway {
+  position: relative; display: flex; flex-direction: column;
+  border: 1px solid var(--line-soft); background: var(--paper);
+  padding: clamp(1.8rem, 3vw, 2.6rem);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), border-color 0.6s var(--ease);
+}
+.gateway:hover { transform: translateY(-6px); box-shadow: 0 30px 56px -34px rgba(28,24,16,0.4); border-color: var(--line); }
+.gateway__index { font-family: var(--font-display); font-size: 1rem; color: var(--bronze); margin-bottom: 1.2rem; }
+.gateway__title { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.1; margin-bottom: 0.8rem; letter-spacing: -0.01em; }
+.gateway__text { font-size: 0.95rem; line-height: 1.65; color: var(--ink-soft); font-weight: 300; margin-bottom: 1.6rem; flex: 1; }
+.gateway__more { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-deep); display: inline-flex; gap: 0.5em; }
+.gateway:hover .gateway__more { color: var(--ink); }
+
+/* ---------- INCLUSIONS LIST (Harmony / Comfort packages) ---------- */
+.inclusions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem 2.5rem; margin-top: 1.8rem; }
+.inclusions li {
+  font-size: 0.96rem; line-height: 1.5; color: var(--ink); font-weight: 300;
+  position: relative; padding-left: 1.6rem;
+}
+.inclusions li::before {
+  content: ""; position: absolute; left: 0; top: 0.55em;
+  width: 0.7rem; height: 0.7rem; border: 1px solid var(--bronze); border-radius: 50%;
+}
+
+/* ---------- INNER-PAGE COMPONENT RESPONSIVE
+   (placed after the definitions above so these overrides win on source order) ---------- */
+@media (max-width: 1024px) {
+  .gateways { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+  .season__cats { grid-template-columns: 1fr; }
+  .inclusions { grid-template-columns: 1fr; }
+  .gateways { grid-template-columns: 1fr; }
+  /* gallery masonry collapses to two columns */
+  .gallery { column-count: 2; }
+}

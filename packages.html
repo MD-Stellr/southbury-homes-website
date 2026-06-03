@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homeowner Programs — Southbury Homes</title>
+  <meta name="description" content="The Harmony and Comfort+ programs — environmental performance and intelligent living, included in every Southbury home." />
+  <meta name="theme-color" content="#1b1a17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('anim');
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" id="scrollProgress"></span></div>
+
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="logo" aria-label="Southbury Homes — home">
+        <img class="logo__img logo__img--light" src="assets/img/logo-white.png" alt="" />
+        <img class="logo__img logo__img--dark" src="assets/img/logo-dark.png" alt="" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-communities">Communities<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-communities">
+            <a href="communities.html#now-selling">Now Selling</a>
+            <a href="communities.html#coming-soon">Coming Soon</a>
+            <a href="communities.html#past">Past Communities</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-design">Design<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-design">
+            <a href="decor-studio.html">Décor Studio</a>
+            <a href="gallery.html">Gallery</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-homeowners">Homeowners<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-homeowners">
+            <a href="packages.html#harmony">Harmony Package</a>
+            <a href="packages.html#comfort">Comfort Package</a>
+            <a href="building-your-home.html">Building Your Home</a>
+            <a href="seasonal-maintenance.html">Seasonal Maintenance</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-about">About<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-about">
+            <a href="about.html#care">Your Home, Our Care</a>
+            <a href="about.html#team">Our Team</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav__top nav__top--link">Contact</a>
+      </nav>
+      <div class="nav__aside">
+        <a href="tel:+19056403709" class="nav__phone">905 640 3709</a>
+        <a href="contact.html" class="btn btn--mini">Inquire</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE OVERLAY MENU ============ -->
+  <div class="menu" id="navOverlay" aria-hidden="true">
+    <nav class="menu__nav" aria-label="Mobile">
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">01</span>Communities<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="communities.html#now-selling">Now Selling</a>
+          <a href="communities.html#coming-soon">Coming Soon</a>
+          <a href="communities.html#past">Past Communities</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">02</span>Design<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="decor-studio.html">Décor Studio</a>
+          <a href="gallery.html">Gallery</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">03</span>Homeowners<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="packages.html#harmony">Harmony Package</a>
+          <a href="packages.html#comfort">Comfort Package</a>
+          <a href="building-your-home.html">Building Your Home</a>
+          <a href="seasonal-maintenance.html">Seasonal Maintenance</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">04</span>About<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="about.html#care">Your Home, Our Care</a>
+          <a href="about.html#team">Our Team</a>
+        </div></div>
+      </div>
+      <a class="menu__link" href="contact.html"><span class="menu__index">05</span>Contact</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+19056403709">905 640 3709</a>
+      <a href="mailto:info@southburyhomes.ca">info@southburyhomes.ca</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow" data-reveal>Homeowner Programs</p>
+        <h1 class="h-display page-hero__title" data-lines>Comfort and care, built in.</h1>
+        <p class="page-hero__lead" data-reveal>Two programs are included in every Southbury home — because the way a home performs, and the way it looks after you, should never be an afterthought.</p>
+      </div>
+    </section>
+
+    <!-- ============ HARMONY ============ -->
+    <section class="section feature" id="harmony">
+      <div class="wrap feature__grid">
+        <div class="feature__media" data-img-reveal>
+          <img src="assets/img/harmony.jpg" alt="A bright, sustainable Southbury interior" width="1100" height="1375" data-parallax data-parallax-speed="-9" />
+          <span class="feature__caption">Harmony — Environmental Performance</span>
+        </div>
+        <div class="feature__text">
+          <p class="eyebrow" data-reveal>Harmony Package</p>
+          <h2 class="h-display" data-lines>A happier, healthier home.</h2>
+          <p class="prose" data-reveal>Southbury Homes believes in providing a happier, healthier home for you and your family, built in a way that will also benefit future generations. Our Harmony Program ensures our homes are built to a higher environmental standard — helping you save money, reduce your carbon footprint, and have a home you can comfortably raise your family in.</p>
+          <ul class="inclusions" data-reveal>
+            <li>Heat Recovery Ventilator (HRV) for fresher air throughout your home</li>
+            <li>Low-VOC paints for better indoor air quality</li>
+            <li>Low-flow toilets, faucets and shower heads</li>
+            <li>LED bulbs</li>
+            <li>96% high-efficiency natural gas furnace</li>
+            <li>ENERGY STAR® qualified smart thermostat</li>
+            <li>…and more</li>
+          </ul>
+          <p class="prose" data-reveal>The Southbury Homes Harmony Package is our commitment to smarter, more sustainable living. Featuring energy-efficient technologies, water-saving innovations, and responsibly sourced materials, it is designed to enhance everyday comfort, reduce environmental impact, and create healthier homes for generations to come.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMFORT+ ============ -->
+    <section class="section feature feature--alt" id="comfort">
+      <div class="wrap feature__grid feature__grid--reverse">
+        <div class="feature__media" data-img-reveal>
+          <img src="assets/img/comfort.jpg" alt="An intelligent, comfortable Southbury living space" width="1100" height="1375" data-parallax data-parallax-speed="-9" />
+          <span class="feature__caption">Comfort+ — Intelligent Living</span>
+        </div>
+        <div class="feature__text">
+          <p class="eyebrow" data-reveal>Comfort+ Package</p>
+          <h2 class="h-display" data-lines>The future, at your fingertips.</h2>
+          <p class="prose" data-reveal>The Southbury Homes Comfort+ Package brings the future of homeownership to your fingertips. Thoughtfully designed to enhance comfort, convenience, security, and efficiency, it empowers homeowners with intelligent technology that simplifies everyday living. Because luxury isn't just about where you live — it's about how you live. With Comfort+, your home becomes smarter, more responsive, and effortlessly connected to the way you live today.</p>
+          <ul class="inclusions" data-reveal>
+            <li>A smart central Automation Hub with touchscreen at the front entrance of the home</li>
+            <li>A smart door lock on the inside garage door leading to the house (grade/options permitting)</li>
+            <li>Smart lighting control</li>
+            <li>Smart thermostat control</li>
+            <li>Smart water-leak sensor</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact">
+      <div class="wrap" style="text-align:center;">
+        <p class="eyebrow eyebrow--center" data-reveal>Inquire</p>
+        <h2 class="h-display" data-lines style="margin-inline:auto;">Begin a conversation.</h2>
+        <p class="section-head__lead" data-reveal style="margin:1.6rem auto 2.4rem;">Whether you are registering for a new release or already living in a Southbury home, our team would be glad to hear from you.</p>
+        <div data-reveal><a href="contact.html" class="btn btn--dark">Contact Southbury</a></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img class="footer__logo" src="assets/img/logo-white.png" alt="Southbury Homes" />
+          <p class="footer__tag">Masterful construction. Exceptional living.</p>
+        </div>
+        <form class="footer__news" id="newsForm" novalidate aria-label="Newsletter signup">
+          <label for="f-news">Receive news of new releases</label>
+          <div class="footer__news-row">
+            <input type="email" id="f-news" name="news-email" placeholder="Email address" required />
+            <button type="submit" aria-label="Subscribe">→</button>
+          </div>
+          <p class="footer__news-msg" id="newsMsg" role="status" hidden>Thank you for subscribing.</p>
+        </form>
+      </div>
+      <div class="footer__grid">
+        <nav class="footer__col" aria-label="Explore">
+          <span class="footer__col-title">Explore</span>
+          <a href="communities.html">Communities</a>
+          <a href="decor-studio.html">Décor Studio</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="about.html">About</a>
+        </nav>
+        <nav class="footer__col" aria-label="Homeowners">
+          <span class="footer__col-title">Homeowners</span>
+          <a href="packages.html#harmony">Harmony Package</a>
+          <a href="packages.html#comfort">Comfort Package</a>
+          <a href="building-your-home.html">Building Your Home</a>
+          <a href="seasonal-maintenance.html">Seasonal Maintenance</a>
+        </nav>
+        <div class="footer__col">
+          <span class="footer__col-title">Contact</span>
+          <a href="tel:+19056403709">905 640 3709</a>
+          <a href="mailto:info@southburyhomes.ca">info@southburyhomes.ca</a>
+          <a href="mailto:sales@southburyhomes.ca">sales@southburyhomes.ca</a>
+          <span class="footer__addr">2–38 Innovator Avenue, Stouffville, ON</span>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>&copy; <span id="year">2026</span> Southbury Homes. All rights reserved.</p>
+        <p class="footer__base-mid">Building across the Greater Toronto Area</p>
+        <a href="#top" class="footer__top-link" data-scroll-link>Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

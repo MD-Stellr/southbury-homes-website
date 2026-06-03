@@ -20,9 +20,76 @@
   });
 
   var nav = document.getElementById('nav');
+  /* inner pages have no dark video hero behind the bar — keep it solid there */
+  var hasHero = !!document.querySelector('.hero');
   function updateNav(y) {
     if (!nav) return;
-    nav.classList.toggle('nav--solid', y > window.innerHeight * 0.72);
+    nav.classList.toggle('nav--solid', !hasHero || y > window.innerHeight * 0.72);
+  }
+  if (!hasHero) updateNav(0);
+
+  /* ---------------- Active nav state (per static page) ---------------- */
+  function normalizePath(p) {
+    p = (p || '').split('?')[0].split('#')[0];
+    p = p.replace(/\/+$/, '');                 // strip trailing slash
+    var base = p.substring(p.lastIndexOf('/') + 1); // file name only
+    base = base.replace(/\.html$/, '');        // strip .html
+    return base === '' || base === 'index' ? 'home' : base;
+  }
+  (function markActiveNav() {
+    var current = normalizePath(location.pathname);
+    document.querySelectorAll('.nav__panel a, .nav__top--link, .menu__sub a, .menu__link, .footer__col a').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return;
+      if (normalizePath(href) === current) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'page');
+        var item = a.closest('.nav__item, .menu__group');
+        if (item) item.classList.add('is-active');
+      }
+    });
+  })();
+
+  /* ---------------- Dropdown nav (desktop) + accordion (mobile) ---------------- */
+  function wireDropdowns() {
+    var toggles = document.querySelectorAll('.nav__top--toggle');
+    function closeAll(except) {
+      toggles.forEach(function (t) {
+        if (t === except) return;
+        t.setAttribute('aria-expanded', 'false');
+        t.parentNode.classList.remove('is-open');
+      });
+    }
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        closeAll(toggle);
+        toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+        toggle.parentNode.classList.toggle('is-open', !open);
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.nav__item')) closeAll(null);
+    });
+
+    /* mobile overlay accordion */
+    document.querySelectorAll('.menu__top').forEach(function (top) {
+      top.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var group = top.parentNode;
+        var open = top.getAttribute('aria-expanded') === 'true';
+        top.setAttribute('aria-expanded', open ? 'false' : 'true');
+        group.classList.toggle('is-open', !open);
+      });
+    });
+  }
+  wireDropdowns();
+  function closeDropdowns() {
+    document.querySelectorAll('.nav__top--toggle[aria-expanded="true"]').forEach(function (t) {
+      t.setAttribute('aria-expanded', 'false');
+      t.parentNode.classList.remove('is-open');
+    });
   }
 
   /* ---------------- Mobile menu ---------------- */
@@ -41,7 +108,9 @@
   }
   if (navToggle) navToggle.addEventListener('click', function () { setMenu(!menuOpen); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && menuOpen) setMenu(false);
+    if (e.key !== 'Escape') return;
+    if (menuOpen) setMenu(false);
+    closeDropdowns();
   });
 
   /* ---------------- Forms (styled, no backend) ---------------- */
@@ -80,8 +149,6 @@
         if (!target) return;
         e.preventDefault();
         if (menuOpen) setMenu(false);
-        /* gated section (preview mode): link is visible but inert */
-        if (id !== '#top' && target.offsetParent === null) return;
         var top = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 78;
         window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
       });
@@ -124,8 +191,6 @@
       if (id !== '#top' && !target) return;
       e.preventDefault();
       if (menuOpen) setMenu(false);
-      /* gated section (preview mode): link is visible but inert */
-      if (target && target.offsetParent === null) return;
       lenis.scrollTo(target, { offset: id === '#top' ? 0 : -78, duration: 1.4 });
     });
   });
@@ -301,8 +366,27 @@
   }
 
   /* ---- Preloader ---- */
+  function buildSceneSafe() {
+    try { buildScene(); }
+    catch (err) {
+      /* graceful fallback — reveal everything */
+      gsap.set('[data-reveal], [data-stagger-item]', { opacity: 1, y: 0, clearProps: 'transform' });
+      gsap.set('[data-img-reveal]', { clipPath: 'inset(0% 0% 0% 0%)' });
+      console.warn('Scene build fell back:', err);
+    }
+  }
+
   function runPreloader() {
     var pre = document.getElementById('preloader');
+
+    /* Inner pages omit the preloader entirely — build the scene once fonts
+       are ready (so line-splitting measures the real font) and bail. */
+    if (!pre) {
+      var fr = document.fonts ? document.fonts.ready : Promise.resolve();
+      fr.then(buildSceneSafe);
+      return;
+    }
+
     var fill = document.getElementById('preloaderFill');
     var countEl = document.getElementById('preloaderCount');
     var counter = { v: 0 };
@@ -330,15 +414,7 @@
     var fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
 
     /* build the scene as soon as fonts are ready (still behind preloader) */
-    fontsReady.then(function () {
-      try { buildScene(); }
-      catch (err) {
-        /* graceful fallback — reveal everything */
-        gsap.set('[data-reveal], [data-stagger-item]', { opacity: 1, y: 0, clearProps: 'transform' });
-        gsap.set('[data-img-reveal]', { clipPath: 'inset(0% 0% 0% 0%)' });
-        console.warn('Scene build fell back:', err);
-      }
-    });
+    fontsReady.then(buildSceneSafe);
 
     Promise.all([minTime, fontsReady]).then(exit);
   }
