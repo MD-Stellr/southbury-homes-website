@@ -859,6 +859,15 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
   color: var(--ink-soft); font-weight: 300;
 }
 
+/* ---------- ABOUT — OUR PROMISE (two-column to fill the width) ---------- */
+.promise { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.promise .statement { max-width: 17ch; margin-bottom: 0; }
+.promise__body .prose { max-width: 52ch; }
+@media (max-width: 1024px) {
+  .promise { grid-template-columns: 1fr; gap: 1.6rem; }
+  .promise .statement { max-width: 26ch; }
+}
+
 /* ---------- TIMELINE (Building Your Home — numbered steps) ---------- */
 .timeline { border-top: 1px solid var(--line); }
 .step {
