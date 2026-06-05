@@ -879,6 +879,11 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
   .promise .statement { max-width: 26ch; }
 }
 
+/* ---------- Décor Studio — tie the intro statement to the page hero, balance the columns ---------- */
+.decor-intro { padding-top: clamp(1.5rem, 3vw, 2.8rem); }
+.promise--decor { align-items: center; }
+.promise--decor .statement { max-width: 24ch; }
+
 /* ---------- TIMELINE (Building Your Home — numbered steps) ---------- */
 .timeline { border-top: 1px solid var(--line); }
 .step {
