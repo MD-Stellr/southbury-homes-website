@@ -380,8 +380,8 @@ body.menu-open .menu__nav > *:nth-child(5) { transition-delay: 0.40s; }
    ========================================================= */
 .hero {
   position: relative; min-height: 100svh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 8rem var(--gutter) 7rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 8rem var(--gutter) clamp(6rem, 12vh, 9rem);
   overflow: hidden;
 }
 .hero__media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
@@ -408,6 +408,14 @@ body.menu-open .menu__nav > *:nth-child(5) { transition-delay: 0.40s; }
 .hero__sub {
   font-size: clamp(1rem, 1.3vw, 1.18rem); line-height: 1.7; font-weight: 300;
   color: rgba(243,239,230,0.86); max-width: 46ch; margin-bottom: 2.6rem;
+}
+.hero__kicker {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: clamp(1.35rem, 3vw, 2.6rem);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  line-height: 1.35; color: var(--bone);
+  margin: 0 0 2.4rem; max-width: 24ch;
+  text-shadow: 0 1px 24px rgba(18, 16, 12, 0.55);
 }
 .hero__actions { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
 
