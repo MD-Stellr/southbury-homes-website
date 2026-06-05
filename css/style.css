@@ -95,6 +95,7 @@ ul { list-style: none; }
   max-width: 20ch;
 }
 .statement em { font-style: italic; color: var(--bronze-deep); }
+.statement--red, .statement--red em { color: #b5302a; }
 .h-display em { font-style: italic; }
 
 .prose {
