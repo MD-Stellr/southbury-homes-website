@@ -363,7 +363,7 @@ body.menu-open .menu__nav > *:nth-child(5) { transition-delay: 0.40s; }
 }
 .menu__sub-list a:last-child { padding-bottom: 1.1rem; }
 .menu__sub-list a:hover, .menu__sub-list a.is-active { color: var(--bronze); }
-.menu__index { font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--bronze); }
+.menu__index { display: none; }
 .menu__foot {
   margin-top: 2.6rem; display: flex; flex-wrap: wrap; gap: 1.6rem;
   font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(243,239,230,0.6);
