@@ -584,12 +584,25 @@ body.menu-open .menu__nav > *:nth-child(5) { transition-delay: 0.40s; }
   box-shadow: 0 32px 60px -34px rgba(28,24,16,0.4);
   border-color: var(--line);
 }
-.card__media { overflow: hidden; }
-.card__media img {
+.card__media { overflow: hidden; position: relative; }
+.card__media > img:not(.card__logo) {
   width: 100%; aspect-ratio: 16 / 10; object-fit: cover;
   transition: transform 1.2s var(--ease);
 }
-.card:hover .card__media img { transform: scale(1.06); }
+.card:hover .card__media > img:not(.card__logo) { transform: scale(1.06); }
+/* program logo badge, bottom-right over the photo */
+.card__logo {
+  position: absolute; z-index: 2;
+  right: clamp(0.75rem, 2.2%, 1.25rem);
+  bottom: clamp(0.75rem, 2.2%, 1.25rem);
+  width: clamp(116px, 34%, 172px); height: auto;
+  padding: 0.5rem 0.66rem;
+  background: rgba(249,246,239,0.92);
+  -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 5px;
+  box-shadow: 0 12px 28px -16px rgba(28,24,16,0.55);
+}
 .card__body { padding: clamp(1.8rem, 3vw, 2.8rem); }
 .card__head { margin-bottom: 1.3rem; }
 .card__title {
