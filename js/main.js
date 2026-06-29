@@ -155,6 +155,8 @@
           email: (fd.get('email') || fd.get('news-email') || '').toString(),
           name: (fd.get('name') || '').toString(),
           phone: (fd.get('phone') || '').toString(),
+          interest: (fd.get('interest') || '').toString(),
+          message: (fd.get('message') || '').toString(),
           botcheck: fd.get('botcheck') ? '1' : ''
         };
         jobs.push(
