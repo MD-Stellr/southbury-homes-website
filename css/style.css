@@ -273,6 +273,13 @@ body.menu-open .nav--solid {
 }
 .nav__item.is-open .nav__caret { transform: rotate(180deg); }
 
+/* "Your Home, Our Care" rendered as its logo in the nav bar */
+.nav__care-logo {
+  display: block; width: auto;
+  height: clamp(30px, 3vw, 38px);
+  filter: drop-shadow(0 1px 2px rgba(20,18,14,0.18));
+}
+
 /* dropdown panel — floats off the bar, so it carries its own solid bg */
 .nav__panel {
   position: absolute; top: 100%; left: -1.1rem; min-width: 13rem;
