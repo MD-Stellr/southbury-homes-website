@@ -949,10 +949,8 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
 .decor-intro { padding-top: clamp(1.5rem, 3vw, 2.8rem); }
 .promise--decor { align-items: center; }
 .promise--decor .statement { max-width: 24ch; }
-.decor-intro__media {
-  margin-top: clamp(2.6rem, 5vw, 4.5rem);
-  overflow: hidden; aspect-ratio: 16 / 9;
-}
+.decor-interlude { padding-block: clamp(0.5rem, 1.5vw, 1.4rem); }
+.decor-intro__media { overflow: hidden; aspect-ratio: 16 / 9; }
 .decor-intro__media img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- TIMELINE (Building Your Home — numbered steps) ---------- */
