@@ -8,3 +8,9 @@ CLAUDE.local.md
 
 # Dependencies (none currently — static site)
 node_modules/
+
+# Secrets & Vercel local state
+.env
+.env.*
+!.env.example
+.vercel

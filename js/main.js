@@ -114,9 +114,16 @@
   });
 
   /* ---------------- Forms ----------------
-     If the form has a non-empty Web3Forms access_key, submit via fetch to
-     https://api.web3forms.com/submit. Otherwise fall back to a cosmetic
-     success message (keeps the site safe before the key is configured). */
+     A form can fan out to two destinations on submit:
+       1. Constant Contact — if it carries data-cc-list="inquiry|newsletter".
+          POSTs JSON to our /api/subscribe function, which adds the contact to
+          the matching CC list (and CC's per-list Welcome Email automation
+          sends the thank-you note).
+       2. Web3Forms — if it carries a non-empty access_key field. This emails
+          the inquiry straight to the team (used on the contact form only).
+     A form may do both (contact form), one (newsletter → CC only), or neither.
+     With neither configured we fall back to a cosmetic success message so the
+     site is never broken before the backend is wired up. */
   function wireForm(formId, msgId) {
     var form = document.getElementById(formId);
     var msg = document.getElementById(msgId);
@@ -129,30 +136,64 @@
         gsap.fromTo(msg, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
       }
     }
+    function fail() {
+      window.alert('Sorry, something went wrong. Please email info@southburyhomes.ca.');
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
+      var fd = new FormData(form);
+      var jobs = [];
+
+      /* 1. Constant Contact (opt-in via data-cc-list) */
+      var ccList = form.getAttribute('data-cc-list');
+      if (ccList) {
+        var payload = {
+          list: ccList,
+          email: (fd.get('email') || fd.get('news-email') || '').toString(),
+          name: (fd.get('name') || '').toString(),
+          phone: (fd.get('phone') || '').toString(),
+          botcheck: fd.get('botcheck') ? '1' : ''
+        };
+        jobs.push(
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (d) { if (!d || !d.success) throw new Error('cc'); })
+        );
+      }
+
+      /* 2. Web3Forms team notification (opt-in via non-empty access_key) */
       var keyField = form.querySelector('[name="access_key"]');
       var hasKey = keyField && keyField.value.trim();
-      if (!hasKey) { showSuccess(); return; } // backend not configured yet
+      if (hasKey) {
+        jobs.push(
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: fd
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (d) { if (!d || !d.success) throw new Error('w3f'); })
+        );
+      }
+
+      if (!jobs.length) { showSuccess(); return; } // backend not configured yet
 
       var btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; }
 
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (data && data.success) { showSuccess(); }
-          else { window.alert('Sorry, something went wrong sending your message. Please email info@southburyhomes.ca.'); }
-        })
-        .catch(function () {
-          window.alert('Sorry, something went wrong sending your message. Please email info@southburyhomes.ca.');
+      /* Succeed if at least one destination accepted it, so a CC hiccup never
+         loses an inquiry the team was already emailed about. */
+      Promise.allSettled(jobs)
+        .then(function (results) {
+          var ok = results.some(function (r) { return r.status === 'fulfilled'; });
+          ok ? showSuccess() : fail();
         })
         .then(function () { if (btn) { btn.disabled = false; } });
     });
