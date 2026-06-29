@@ -212,7 +212,7 @@ em.word { font-style: italic; }
 }
 .nav__inner {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 2rem;
+  gap: clamp(1rem, 2.4vw, 2rem);
   max-width: var(--wrap); margin-inline: auto;
   padding: clamp(1rem, 2vw, 1.7rem) var(--gutter);
   transition: padding 0.55s var(--ease);
@@ -248,8 +248,8 @@ body.menu-open .nav--solid {
 /* top-level triggers (button) + plain links share one look */
 .nav__top {
   position: relative; display: inline-flex; align-items: center; gap: 0.45em;
-  font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
-  color: var(--bone); padding-block: 0.4rem;
+  font-size: clamp(0.56rem, 0.92vw, 0.74rem); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 400;
+  color: var(--bone); padding-block: 0.4rem; white-space: nowrap;
   transition: color 0.55s var(--ease), opacity 0.3s;
 }
 .nav--solid .nav__top { color: var(--ink); }
@@ -295,9 +295,10 @@ body.menu-open .nav--solid {
 .nav__panel a:hover { color: var(--ink); background: var(--paper); }
 .nav__panel a.is-active { color: var(--bronze-deep); }
 
-.nav__aside { display: flex; align-items: center; gap: 1.6rem; }
+.nav__aside { display: flex; align-items: center; gap: clamp(0.85rem, 1.6vw, 1.6rem); }
 .nav__phone {
-  font-size: 0.78rem; letter-spacing: 0.1em; color: var(--bone);
+  font-size: clamp(0.62rem, 0.95vw, 0.78rem); letter-spacing: 0.1em; color: var(--bone);
+  white-space: nowrap;
   transition: color 0.55s var(--ease);
 }
 .nav--solid .nav__phone { color: var(--ink); }
