@@ -54,12 +54,11 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    await fetch(process.env.KV_REST_API_URL, {
+    var kvApiUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+    var kvApiToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+    await fetch(kvApiUrl, {
       method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + process.env.KV_REST_API_TOKEN,
-        'Content-Type': 'application/json'
-      },
+      headers: { Authorization: 'Bearer ' + kvApiToken, 'Content-Type': 'application/json' },
       body: JSON.stringify(['SET', RT_KEY, d.refresh_token])
     });
 

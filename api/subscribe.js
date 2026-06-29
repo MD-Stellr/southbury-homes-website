@@ -16,14 +16,16 @@ var RT_KEY = 'cc:refresh_token';
 var TOKEN_URL = 'https://authz.constantcontact.com/oauth2/default/v1/token';
 var SIGNUP_URL = 'https://api.cc.email/v3/contacts/sign_up_form';
 
-/* ---- Vercel KV (Upstash Redis REST, command-array form) ---- */
+/* ---- Vercel KV (Upstash Redis REST, command-array form) ----
+   Accept either env-var naming Vercel may provide depending on how the
+   store was created (classic "KV_*" or the Upstash marketplace "UPSTASH_*"). */
+function kvUrl() { return process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL; }
+function kvToken() { return process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN; }
+
 async function kv(command) {
-  var r = await fetch(process.env.KV_REST_API_URL, {
+  var r = await fetch(kvUrl(), {
     method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + process.env.KV_REST_API_TOKEN,
-      'Content-Type': 'application/json'
-    },
+    headers: { Authorization: 'Bearer ' + kvToken(), 'Content-Type': 'application/json' },
     body: JSON.stringify(command)
   });
   var d = await r.json();
@@ -90,7 +92,7 @@ module.exports = async function handler(req, res) {
 
   // Not configured yet (env/KV/list missing) → stay graceful so the form UX
   // never breaks before the backend is fully wired up.
-  if (!process.env.CC_CLIENT_ID || !process.env.KV_REST_API_URL || !listId) {
+  if (!process.env.CC_CLIENT_ID || !kvUrl() || !listId) {
     res.status(200).json({ success: true, stored: false, reason: 'not_configured' });
     return;
   }
