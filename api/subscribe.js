@@ -71,6 +71,7 @@ async function resolveCustomFields(token) {
   var r = await fetch(CUSTOM_FIELD_URL + '?limit=100', {
     headers: { Authorization: 'Bearer ' + token, Accept: 'application/json' }
   });
+  if (!r.ok) console.error('[subscribe] custom-field GET failed', r.status, (await r.text()).slice(0, 300));
   var existing = r.ok ? ((await r.json()).custom_fields || []) : [];
   var byLabel = {};
   existing.forEach(function (f) { byLabel[String(f.label || '').toLowerCase()] = f.custom_field_id; });
@@ -85,9 +86,11 @@ async function resolveCustomFields(token) {
         body: JSON.stringify({ label: want.label, type: 'string' })
       });
       if (c.ok) id = (await c.json()).custom_field_id; // skip silently if create fails (e.g. 25-field cap)
+      else console.error('[subscribe] custom-field CREATE failed', want.label, c.status, (await c.text()).slice(0, 300));
     }
     if (id) map[want.key] = id;
   }
+  console.error('[subscribe] custom-field map', JSON.stringify(map));
   return map;
 }
 
@@ -121,6 +124,7 @@ async function addContact(token, listId, fields, cf) {
     body: JSON.stringify(payload)
   });
   if (!r.ok) throw new Error('cc_signup_failed_' + r.status);
+  console.error('[subscribe] contact saved', JSON.stringify({ customs: customs.length, phone: !!payload.phone_number }));
   return true;
 }
 
