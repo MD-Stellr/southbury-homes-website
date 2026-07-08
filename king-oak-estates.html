@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>King Oak Estates, Oak Ridges — Southbury Homes</title>
+  <meta name="description" content="King Oak Estates — an exclusive collection of just eight architecturally refined single-family homes in the prestigious Oak Ridges community of Richmond Hill. Register now for priority access." />
+  <meta name="theme-color" content="#1b1a17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('anim');
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" id="scrollProgress"></span></div>
+
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="/" class="logo" aria-label="Southbury Homes — home">
+        <img class="logo__img logo__img--light" src="assets/img/logo-white.png" alt="" />
+        <img class="logo__img logo__img--dark" src="assets/img/logo-dark.png" alt="" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-communities">Communities<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-communities">
+            <a href="/king-oak-estates">King Oak Estates</a>
+            <a href="/communities#now-selling">Now Selling</a>
+            <a href="/communities#coming-soon">Coming Soon</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-design">Design<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-design">
+            <a href="/decor-studio">Inspirational Gallery</a>
+            <a href="/gallery">Portfolio</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-homeowners"><img class="nav__care-logo" src="assets/img/your-home-our-care.png" alt="Your Home, Our Care" /><span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-homeowners">
+            <a href="/packages#harmony">Harmony Package</a>
+            <a href="/packages#comfort">Comfort Package</a>
+            <a href="/building-your-home">Building Your Home</a>
+            <a href="/seasonal-maintenance">Seasonal Maintenance</a>
+          </div>
+        </div>
+        <div class="nav__item">
+          <button type="button" class="nav__top nav__top--toggle" aria-expanded="false" aria-controls="dd-about">Why Southbury<span class="nav__caret" aria-hidden="true"></span></button>
+          <div class="nav__panel" id="dd-about">
+            <a href="/about">Our Promise</a>
+            <a href="/about#team">Our Lead</a>
+          </div>
+        </div>
+        <a href="/contact" class="nav__top nav__top--link">Contact</a>
+      </nav>
+      <div class="nav__aside">
+        <a href="tel:+19056403709" class="nav__phone">905 640 3709</a>
+        <a href="#register" class="btn btn--mini" data-scroll-link>Register</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE OVERLAY MENU ============ -->
+  <div class="menu" id="navOverlay" aria-hidden="true">
+    <nav class="menu__nav" aria-label="Mobile">
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">01</span>Communities<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="/king-oak-estates">King Oak Estates</a>
+          <a href="/communities#now-selling">Now Selling</a>
+          <a href="/communities#coming-soon">Coming Soon</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">02</span>Design<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="/decor-studio">Inspirational Gallery</a>
+          <a href="/gallery">Portfolio</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">03</span>Your Home, Our Care<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="/packages#harmony">Harmony Package</a>
+          <a href="/packages#comfort">Comfort Package</a>
+          <a href="/building-your-home">Building Your Home</a>
+          <a href="/seasonal-maintenance">Seasonal Maintenance</a>
+        </div></div>
+      </div>
+      <div class="menu__group">
+        <button type="button" class="menu__top" aria-expanded="false"><span class="menu__index">04</span>Why Southbury<span class="menu__caret" aria-hidden="true"></span></button>
+        <div class="menu__sub"><div class="menu__sub-list">
+          <a href="/about">Our Promise</a>
+          <a href="/about#team">Our Lead</a>
+        </div></div>
+      </div>
+      <a class="menu__link" href="/contact"><span class="menu__index">05</span>Contact</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+19056403709">905 640 3709</a>
+      <a href="mailto:info@southburyhomes.ca">info@southburyhomes.ca</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero hero--image" id="top">
+      <div class="hero__media">
+        <img class="hero__img" src="assets/img/decor-band.jpg" alt="A King Oak Estates gourmet kitchen in warm stone and brass" width="2400" height="1497" />
+        <div class="hero__scrim"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light" data-reveal>Oak Ridges &middot; Richmond Hill &middot; Now Selling</p>
+        <h1 class="hero__title">
+          <span class="line">King Oak</span>
+          <span class="line"><em>Estates</em></span>
+        </h1>
+        <div class="hero__meta" data-reveal>
+          <span>8 Residences Only</span>
+          <span>Single-Family</span>
+          <span>A Nature-Rich Enclave</span>
+        </div>
+        <p class="hero__sub" data-reveal>An exclusive collection of just eight architecturally refined single-family homes, in one of Oak Ridges&rsquo; most desirable locations.</p>
+        <div class="hero__actions" data-reveal>
+          <a href="#register" class="btn btn--light" data-scroll-link>Register Now</a>
+          <a href="#welcome" class="link-underline link-underline--light" data-scroll-link>Discover the community<span class="link-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <a href="#welcome" class="hero__scroll" data-scroll-link aria-label="Scroll to discover">
+        <span>Scroll</span>
+        <span class="hero__scroll-line"><i></i></span>
+      </a>
+    </section>
+
+    <!-- ============ WELCOME ============ -->
+    <section class="section" id="welcome">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>Welcome to King Oak Estates</p>
+          <h2 class="h-display" data-lines>Only eight will ever <em>call it home.</em></h2>
+        </header>
+
+        <div class="koe-intro">
+          <div class="koe-intro__figure" data-reveal>
+            <span class="koe-intro__num" aria-hidden="true">8</span>
+            <span class="koe-intro__num-label">Architecturally refined residences. No more.</span>
+          </div>
+          <div class="koe-intro__body">
+            <p class="prose" data-reveal>King Oak Estates is an exclusive collection of just eight architecturally refined single-family homes in the prestigious Oak Ridges community of Richmond Hill.</p>
+            <p class="prose" data-reveal>Crafted for modern luxury living, each residence showcases a thoughtfully designed open-concept layout, soaring ceilings, and expansive windows that fill the home with natural light. Elegant interiors feature gourmet kitchens with premium finishes, spa-inspired primary suites, and carefully curated details that blend style with everyday comfort.</p>
+            <p class="prose" data-reveal>Set within a nature-rich enclave, King Oak Estates offers residents a rare sense of privacy while remaining close to top-rated schools, scenic trails, parks, and convenient transit. This is a community where tranquility meets accessibility &mdash; perfect for families and discerning homeowners alike.</p>
+            <p class="prose" data-reveal>With only eight homes available, King Oak Estates presents a limited and exceptional opportunity to own in one of Oak Ridges&rsquo; most desirable locations. Discover a lifestyle defined by sophistication, exclusivity, and natural beauty.</p>
+
+            <div class="koe-facts" data-stagger>
+              <div data-stagger-item>
+                <span class="koe-fact__label">Residences</span>
+                <span class="koe-fact__value">Eight</span>
+              </div>
+              <div data-stagger-item>
+                <span class="koe-fact__label">Home Type</span>
+                <span class="koe-fact__value">Single-Family</span>
+              </div>
+              <div data-stagger-item>
+                <span class="koe-fact__label">Setting</span>
+                <span class="koe-fact__value">Oak Ridges</span>
+              </div>
+              <div data-stagger-item>
+                <span class="koe-fact__label">Status</span>
+                <span class="koe-fact__value">Now Selling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BREAK ============ -->
+    <section class="break">
+      <div class="break__media">
+        <img src="assets/img/king-oak.jpg" alt="" width="2400" height="1280" data-parallax data-parallax-speed="12" loading="lazy" />
+        <div class="break__scrim"></div>
+      </div>
+      <div class="wrap break__content">
+        <blockquote class="break__quote" data-lines>
+          Sophistication, exclusivity, and natural beauty.
+        </blockquote>
+        <p class="break__by" data-reveal>King Oak Estates, Oak Ridges</p>
+      </div>
+    </section>
+
+    <!-- ============ SITE PLAN ============ -->
+    <section class="section feature--alt" id="site-plan">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>The Site Plan</p>
+          <h2 class="h-display" data-lines>Eight lots on a private lane.</h2>
+          <p class="section-head__lead" data-reveal>A quiet enclave bordered by a protected green edge, each homesite composed for privacy, light, and a generous relationship to the landscape.</p>
+        </header>
+
+        <div class="siteplan" data-reveal>
+          <svg viewBox="0 0 1200 560" role="img" aria-label="Illustrative site plan of King Oak Estates — eight lots along a private lane ending in a court, bordered by a protected green edge">
+            <!-- protected green edge -->
+            <line x1="30" y1="52" x2="1170" y2="52" stroke="#9c7d51" stroke-width="1" stroke-dasharray="1 7" opacity="0.9" />
+            <text x="30" y="34" font-family="Jost, sans-serif" font-size="13" letter-spacing="4" fill="#8c8779">PROTECTED GREEN EDGE</text>
+            <g fill="none" stroke="#ddd6c6" stroke-width="1">
+              <circle cx="120" cy="72" r="11" /><circle cx="305" cy="68" r="8" /><circle cx="512" cy="74" r="12" />
+              <circle cx="700" cy="67" r="8" /><circle cx="905" cy="73" r="11" /><circle cx="1090" cy="69" r="8" />
+            </g>
+
+            <!-- eight lots -->
+            <g fill="none" stroke="#9c7d51" stroke-width="1">
+              <rect x="40"  y="100" width="128" height="270" opacity="0.55" />
+              <rect x="168" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="296" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="424" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="552" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="680" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="808" y="100" width="128" height="270" opacity="0.55" />
+              <rect x="936" y="100" width="128" height="270" opacity="0.55" />
+            </g>
+            <!-- house footprints -->
+            <g fill="rgba(156,125,81,0.10)" stroke="#6f5836" stroke-width="1">
+              <path d="M66 190 h76 v96 h-50 v-22 h-26 z" />
+              <path d="M194 176 h76 v110 h-76 z" />
+              <path d="M322 190 h50 v-22 h26 v118 h-76 z" />
+              <path d="M450 176 h76 v110 h-76 z" />
+              <path d="M578 190 h76 v96 h-50 v-22 h-26 z" />
+              <path d="M706 176 h76 v110 h-76 z" />
+              <path d="M834 190 h50 v-22 h26 v118 h-76 z" />
+              <path d="M962 176 h76 v110 h-76 z" />
+            </g>
+            <!-- lot numerals -->
+            <g font-family="'Cormorant Garamond', serif" font-size="30" fill="#57534a" text-anchor="middle">
+              <text x="104"  y="150">1</text><text x="232" y="150">2</text><text x="360" y="150">3</text><text x="488" y="150">4</text>
+              <text x="616" y="150">5</text><text x="744" y="150">6</text><text x="872" y="150">7</text><text x="1000" y="150">8</text>
+            </g>
+            <!-- driveways -->
+            <g stroke="#ddd6c6" stroke-width="1">
+              <line x1="104" y1="370" x2="104" y2="408" /><line x1="232" y1="370" x2="232" y2="408" />
+              <line x1="360" y1="370" x2="360" y2="408" /><line x1="488" y1="370" x2="488" y2="408" />
+              <line x1="616" y1="370" x2="616" y2="408" /><line x1="744" y1="370" x2="744" y2="408" />
+              <line x1="872" y1="370" x2="872" y2="408" /><line x1="1000" y1="370" x2="1000" y2="408" />
+            </g>
+
+            <!-- private lane with court -->
+            <g fill="none" stroke="#6f5836" stroke-width="1.4">
+              <path d="M30 408 H1010" />
+              <path d="M30 470 H1010" />
+              <circle cx="1063" cy="439" r="56" />
+            </g>
+            <circle cx="1063" cy="439" r="18" fill="none" stroke="#ddd6c6" stroke-width="1" />
+            <text x="520" y="446" font-family="Jost, sans-serif" font-size="13" letter-spacing="6" fill="#8c8779" text-anchor="middle">PRIVATE LANE</text>
+
+            <!-- north arrow -->
+            <g transform="translate(1128, 120)">
+              <circle r="24" fill="none" stroke="#ddd6c6" stroke-width="1" />
+              <path d="M0 -14 L6 8 L0 3 L-6 8 Z" fill="#9c7d51" />
+              <text y="44" font-family="Jost, sans-serif" font-size="12" letter-spacing="3" fill="#8c8779" text-anchor="middle">N</text>
+            </g>
+          </svg>
+        </div>
+        <div class="siteplan-meta" data-reveal>
+          <p>Artist&rsquo;s concept, not to scale. Final site plan &amp; feature sheet to follow.</p>
+          <a class="link-underline" href="#register" data-scroll-link>Request the feature sheet<span class="link-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEIGHBOURHOOD ============ -->
+    <section class="section" id="neighbourhood">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>Your Neighbourhood</p>
+          <h2 class="h-display" data-lines>Where the moraine meets <em>the everyday.</em></h2>
+          <p class="section-head__lead" data-reveal>Oak Ridges sits on the crest of the Oak Ridges Moraine — a rare pocket of the GTA where conservation forest, kettle lakes, and quiet streets share an address with excellent schools, golf, and quick connections to everywhere you need to be.</p>
+        </header>
+
+        <div class="koe-hood">
+          <div class="koe-hood__cats">
+            <div data-reveal>
+              <p class="cat__title">Trails &amp; Conservation</p>
+              <ul class="cat__list">
+                <li>Oak Ridges Moraine trail network</li>
+                <li>Jefferson Forest &amp; Bond Lake woodlands</li>
+                <li>Protected greenlands at your doorstep</li>
+              </ul>
+            </div>
+            <div data-reveal>
+              <p class="cat__title">Lakes &amp; Parks</p>
+              <ul class="cat__list">
+                <li>Lake Wilcox Park &amp; waterfront promenade</li>
+                <li>Sunset Beach &amp; kettle-lake shorelines</li>
+                <li>Neighbourhood parks and playgrounds</li>
+              </ul>
+            </div>
+            <div data-reveal>
+              <p class="cat__title">Golf &amp; Recreation</p>
+              <ul class="cat__list">
+                <li>Renowned golf and country clubs nearby</li>
+                <li>Oak Ridges Community Centre &amp; Pool</li>
+                <li>Sports complexes and year-round programs</li>
+              </ul>
+            </div>
+            <div data-reveal>
+              <p class="cat__title">Schools &amp; Transit</p>
+              <ul class="cat__list">
+                <li>Top-rated public and private schools</li>
+                <li>GO Transit and Viva connections</li>
+                <li>Yonge Street shops and daily conveniences</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="koe-hood__media" data-stagger>
+            <figure class="ph-tile" data-stagger-item>
+              <figcaption class="ph-tile__caption">Lake Wilcox Waterfront<em>Photography to follow</em></figcaption>
+            </figure>
+            <figure class="ph-tile" data-stagger-item>
+              <figcaption class="ph-tile__caption">Oak Ridges Moraine Trails<em>Photography to follow</em></figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- ---- the distance index ---- -->
+        <div class="reach">
+          <div class="reach__head" data-reveal>
+            <h3 class="reach__title">From your front door.</h3>
+            <p class="reach__note">Approximate drive times</p>
+          </div>
+
+          <div class="reach__row">
+            <p class="reach__place">GO Transit<em>Gormley Station</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.2"></i></span>
+            <p class="reach__time"><span data-count data-count-to="8">8</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Aurora<em>Historic downtown</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.25"></i></span>
+            <p class="reach__time"><span data-count data-count-to="10">10</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Highway 404<em>via Stouffville Road</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.3"></i></span>
+            <p class="reach__time"><span data-count data-count-to="12">12</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Highway 400<em>via King Road</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.45"></i></span>
+            <p class="reach__time"><span data-count data-count-to="18">18</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Highway 407<em>Express toll route</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.5"></i></span>
+            <p class="reach__time"><span data-count data-count-to="20">20</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Markham<em>City centre</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:0.63"></i></span>
+            <p class="reach__time"><span data-count data-count-to="25">25</span><span class="reach__unit">min</span></p>
+          </div>
+          <div class="reach__row">
+            <p class="reach__place">Toronto<em>Downtown</em></p>
+            <span class="reach__track"><i class="reach__bar" data-bar style="--reach:1"></i></span>
+            <p class="reach__time"><span data-count data-count-to="40">40</span><span class="reach__unit">min</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EVOKA COMPLETE HOME ============ -->
+    <section class="section koe-evoka" id="evoka">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>The Evoka Complete Home</p>
+          <h2 class="h-display" data-lines>Every square foot, designed <em>with intention.</em></h2>
+          <p class="section-head__lead" data-reveal>Integrated millwork and concealed storage create a clean, streamlined look. Precision-built and beautifully refined, every element of your home is designed to perfection.</p>
+        </header>
+
+        <div class="evoka-grid" data-stagger>
+          <div class="evoka-item" data-stagger-item>
+            <span class="evoka-item__num">01</span>
+            <h3 class="evoka-item__title">Designer Kitchens</h3>
+            <p class="evoka-item__body">Full-height millwork featuring grand islands, finished in warm tones for a streamlined aesthetic that anchors the home.</p>
+          </div>
+          <div class="evoka-item" data-stagger-item>
+            <span class="evoka-item__num">02</span>
+            <h3 class="evoka-item__title">Grand Open Spaces</h3>
+            <p class="evoka-item__body">Teamed with Allora Design Co. and Ciccone Simone, Southbury brings thoughtfully proportioned living areas that balance comfort, clarity, and connection.</p>
+          </div>
+          <div class="evoka-item" data-stagger-item>
+            <span class="evoka-item__num">03</span>
+            <h3 class="evoka-item__title">The Living Area</h3>
+            <p class="evoka-item__body">Square layouts ideal for lounging or entertaining, framed by soft natural light and access to exterior balconies.</p>
+          </div>
+        </div>
+
+        <div class="evoka-render" data-reveal>
+          <p>Evoka interior renderings &mdash; arriving soon</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERIOR DESIGN TEAM ============ -->
+    <section class="section" id="design-team">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>The Interior Design Team</p>
+          <h2 class="h-display" data-lines>Two studios, one standard.</h2>
+          <p class="section-head__lead" data-reveal>The floor plans and interiors of King Oak Estates were shaped in collaboration with two of the region&rsquo;s most respected design studios.</p>
+        </header>
+
+        <div class="duo" data-stagger>
+          <article class="duo__studio" data-stagger-item>
+            <h3 class="duo__mark">Allora Design Co.<span>Logo artwork to follow</span></h3>
+            <p class="duo__role">Floor Plans &amp; Interior Architecture</p>
+            <p class="duo__text">Allora Design Co. shaped the floor plans of King Oak Estates around the way families actually live — open where it matters, private where it counts, with sightlines and natural light considered from the first sketch.</p>
+          </article>
+          <article class="duo__studio" data-stagger-item>
+            <h3 class="duo__mark">Ciccone Simone<span>Logo artwork to follow</span></h3>
+            <p class="duo__role">Interior Design</p>
+            <p class="duo__text">A celebrated Toronto design house, Ciccone Simone brings a layered, tailored sensibility to every residence — warm materials, precise detailing, and interiors that feel collected rather than decorated.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BROCHURE ============ -->
+    <section class="section feature--alt" id="brochure" style="padding-block: clamp(3rem, 5vw, 5rem);">
+      <div class="wrap">
+        <div class="coming-state" data-reveal>
+          <p class="eyebrow eyebrow--center">The Brochure</p>
+          <h3>Currently at press.</h3>
+          <p>The King Oak Estates digital brochure — plans, features, and finishes — is being finalized. Registrants receive it first, the moment it is released.</p>
+          <a href="#register" class="link-underline" data-scroll-link>Register to receive it<span class="link-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REGISTER ============ -->
+    <section class="section contact" id="register">
+      <div class="wrap contact__grid">
+        <div class="contact__intro">
+          <p class="eyebrow" data-reveal>Register Now</p>
+          <h2 class="h-display" data-lines>Eight homes. <em>One conversation away.</em></h2>
+          <p class="prose" data-reveal style="margin-top:1.6rem; max-width:48ch;">Register for priority access to King Oak Estates — floor plans, the feature sheet, pricing, and the brochure, delivered to registrants before public release.</p>
+          <div class="contact__details" data-stagger>
+            <div class="contact__item" data-stagger-item>
+              <span class="contact__label">New Home Sales</span>
+              <p><a href="mailto:sales@southburyhomes.ca">sales@southburyhomes.ca</a></p>
+            </div>
+            <div class="contact__item" data-stagger-item>
+              <span class="contact__label">Telephone</span>
+              <p><a href="tel:+19056403709">905 640 3709</a></p>
+            </div>
+            <div class="contact__item" data-stagger-item>
+              <span class="contact__label">Community</span>
+              <p>King Oak Estates<br />Oak Ridges, Richmond Hill</p>
+            </div>
+            <div class="contact__item" data-stagger-item>
+              <span class="contact__label">Status</span>
+              <p>Now selling &mdash; 8 residences</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact__form-wrap" data-reveal>
+          <form class="form" id="inquiryForm" data-cc-list="inquiry" novalidate>
+            <!-- Web3Forms access key (submissions email to the address registered at web3forms.com) -->
+            <input type="hidden" name="access_key" value="5961578b-0194-460b-9f16-ffc91dfa8a09" />
+            <input type="hidden" name="subject" value="New King Oak Estates registration" />
+            <input type="hidden" name="from_name" value="Southbury Homes Website" />
+            <input type="hidden" name="interest" value="King Oak Estates" />
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none !important;" />
+            <div class="form__row">
+              <div class="field">
+                <label for="f-name">Full name</label>
+                <input type="text" id="f-name" name="name" autocomplete="name" required />
+              </div>
+            </div>
+            <div class="form__row form__row--two">
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input type="email" id="f-email" name="email" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone</label>
+                <input type="tel" id="f-phone" name="phone" autocomplete="tel" />
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="f-message">Anything we should know? <span style="text-transform:none;letter-spacing:0.02em;">(optional)</span></label>
+                <textarea id="f-message" name="message" rows="3"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--dark btn--full">Register for Priority Access</button>
+            <p class="form__note">Registrants receive plans, pricing &amp; the brochure first.</p>
+            <p class="form__success" id="formSuccess" role="status" hidden>
+              Thank you — you are registered for King Oak Estates. We will be in touch with first access details.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img class="footer__logo" src="assets/img/logo-white.png" alt="Southbury Homes" />
+          <img class="footer__logo footer__logo--care" src="assets/img/your-home-our-care.png" alt="Your Home, Our Care" />
+        </div>
+        <form class="footer__news" id="newsForm" data-cc-list="newsletter" novalidate aria-label="Newsletter signup">
+          <label for="f-news">Receive news of new releases</label>
+          <div class="footer__news-row">
+            <input type="email" id="f-news" name="news-email" placeholder="Email address" required />
+            <button type="submit" aria-label="Subscribe">→</button>
+          </div>
+          <p class="footer__news-msg" id="newsMsg" role="status" hidden>Thank you for subscribing.</p>
+        </form>
+      </div>
+      <div class="footer__grid">
+        <nav class="footer__col" aria-label="Explore">
+          <span class="footer__col-title">Explore</span>
+          <a href="/communities">Communities</a>
+          <a href="/decor-studio">Inspirational Gallery</a>
+          <a href="/gallery">Portfolio</a>
+          <a href="/about">About</a>
+        </nav>
+        <nav class="footer__col" aria-label="Homeowners">
+          <span class="footer__col-title">Homeowners</span>
+          <a href="/packages#harmony">Harmony Package</a>
+          <a href="/packages#comfort">Comfort Package</a>
+          <a href="/building-your-home">Building Your Home</a>
+          <a href="/seasonal-maintenance">Seasonal Maintenance</a>
+        </nav>
+        <div class="footer__col">
+          <span class="footer__col-title">Contact</span>
+          <a href="tel:+19056403709">905 640 3709</a>
+          <a href="mailto:info@southburyhomes.ca">info@southburyhomes.ca</a>
+          <a href="mailto:sales@southburyhomes.ca">sales@southburyhomes.ca</a>
+          <span class="footer__addr">2–38 Innovator Avenue, Stouffville, ON</span>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>&copy; <span id="year">2026</span> Southbury Homes. All rights reserved.</p>
+        <p class="footer__base-mid">Building across the Greater Toronto Area</p>
+        <a href="#top" class="footer__top-link" data-scroll-link>Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

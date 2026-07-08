@@ -1127,3 +1127,217 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
   /* gallery masonry collapses to two columns */
   .gallery { column-count: 2; }
 }
+
+/* =========================================================
+   KING OAK ESTATES — landing page
+   ========================================================= */
+
+/* ---------- image hero (video hero minus the video) ---------- */
+.hero--image .hero__img {
+  position: absolute; left: 0; top: -12%; width: 100%; height: 124%;
+  object-fit: cover; will-change: transform;
+}
+.hero__meta {
+  display: flex; flex-wrap: wrap; gap: 0.9rem 0;
+  margin-bottom: 2.4rem;
+}
+.hero__meta span {
+  font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(243,239,230,0.85); white-space: nowrap;
+}
+.hero__meta span + span::before {
+  content: ""; display: inline-block; vertical-align: middle;
+  width: 2rem; height: 1px; background: var(--bronze); margin-inline: 1.3rem;
+}
+
+/* ---------- welcome: the figure eight + prose ---------- */
+.koe-intro {
+  display: grid; grid-template-columns: 0.72fr 1.28fr;
+  gap: clamp(2.5rem, 6vw, 7rem); align-items: start;
+}
+.koe-intro__figure { position: sticky; top: clamp(6rem, 14vh, 9rem); }
+.koe-intro__num {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(11rem, 24vw, 21rem); line-height: 0.78;
+  color: var(--bronze); letter-spacing: -0.03em;
+}
+.koe-intro__num-label {
+  display: block; margin-top: 1.4rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-soft); max-width: 16ch; line-height: 1.9;
+}
+.koe-intro__body .prose { max-width: 56ch; }
+.koe-facts {
+  display: grid; grid-template-columns: repeat(4, auto);
+  justify-content: start; gap: 1.6rem clamp(1.8rem, 3.5vw, 3.4rem);
+  border-top: 1px solid var(--line);
+  margin-top: clamp(2rem, 3.5vw, 3rem); padding-top: clamp(1.6rem, 2.6vw, 2.2rem);
+}
+.koe-fact__label {
+  display: block; font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--bronze-deep); margin-bottom: 0.55rem;
+}
+.koe-fact__value { font-family: var(--font-display); font-size: clamp(1.15rem, 1.6vw, 1.45rem); line-height: 1.2; }
+
+/* ---------- site plan ---------- */
+.siteplan {
+  border: 1px solid var(--line); background: var(--paper);
+  padding: clamp(1.2rem, 3vw, 2.6rem);
+}
+.siteplan svg { display: block; width: 100%; height: auto; }
+.siteplan-meta {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.8rem 2rem; margin-top: 1.4rem;
+}
+.siteplan-meta p { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--ink-mute); }
+
+/* ---------- neighbourhood ---------- */
+.koe-hood {
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 6.5rem); align-items: start;
+}
+.koe-hood__cats { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.8rem, 3vw, 2.6rem) clamp(1.8rem, 3.5vw, 3rem); }
+.koe-hood__media { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.8rem, 1.6vw, 1.4rem); }
+.ph-tile {
+  position: relative; overflow: hidden; aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, var(--line-soft) 0%, var(--paper) 100%);
+  border: 1px solid var(--line-soft);
+}
+.ph-tile:nth-child(even) { background: linear-gradient(135deg, var(--paper) 0%, var(--line-soft) 100%); }
+.ph-tile::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  width: 28px; height: 28px; transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid var(--line); opacity: 0.55;
+}
+.ph-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ph-tile__caption {
+  position: absolute; left: 1rem; bottom: 1rem; right: 1rem; z-index: 1;
+  font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft);
+}
+.ph-tile__caption em { display: block; font-style: normal; color: var(--ink-mute); letter-spacing: 0.12em; margin-top: 0.3rem; }
+
+/* ---------- reach — the distance index ---------- */
+.reach { margin-top: clamp(3rem, 6vw, 5rem); }
+.reach__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.8rem 2rem; margin-bottom: clamp(1.4rem, 2.4vw, 2rem);
+}
+.reach__title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem); letter-spacing: -0.01em;
+}
+.reach__note { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.reach__row {
+  display: grid; grid-template-columns: minmax(10rem, 17rem) 1fr auto;
+  align-items: center; column-gap: clamp(1.4rem, 3.5vw, 3.5rem);
+  padding-block: clamp(0.95rem, 1.8vw, 1.45rem);
+  border-top: 1px solid var(--line);
+}
+.reach__row:last-child { border-bottom: 1px solid var(--line); }
+.reach__place {
+  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 400; color: var(--ink); line-height: 1.5;
+}
+.reach__place em {
+  display: block; font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 0.92rem; letter-spacing: 0.02em; text-transform: none; color: var(--ink-mute);
+  margin-top: 0.15rem;
+}
+.reach__track { position: relative; height: 1px; background: var(--line-soft); }
+.reach__bar {
+  position: absolute; left: 0; top: -1px; height: 3px;
+  width: calc(var(--reach, 1) * 100%);
+  background: linear-gradient(90deg, var(--bronze) 0%, var(--bronze-deep) 100%);
+  transform-origin: left center; display: block;
+}
+.reach__time {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1;
+  display: flex; align-items: baseline; min-width: 4.1ch; justify-content: flex-end;
+}
+.reach__unit {
+  font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--bronze-deep); margin-left: 0.55em;
+}
+
+/* ---------- Evoka — dark editorial band ---------- */
+.koe-evoka { background: var(--umber); color: var(--bone); }
+.koe-evoka .h-display { color: var(--bone); }
+.koe-evoka .eyebrow { color: rgba(243,239,230,0.78); }
+.koe-evoka .section-head__lead { color: rgba(243,239,230,0.72); }
+.evoka-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  border-top: 1px solid rgba(243,239,230,0.16);
+  padding-top: clamp(2.2rem, 4vw, 3.2rem);
+  margin-top: clamp(2.2rem, 4vw, 3.4rem);
+}
+.evoka-item__num {
+  font-family: var(--font-display); font-size: 1.05rem; color: var(--bronze);
+  display: block; margin-bottom: 1.3rem; letter-spacing: 0.05em;
+}
+.evoka-item__title {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(1.4rem, 2vw, 1.75rem);
+  margin-bottom: 0.8rem; letter-spacing: -0.01em; color: var(--bone);
+}
+.evoka-item__body { font-size: 0.95rem; line-height: 1.72; color: rgba(243,239,230,0.66); font-weight: 300; }
+.evoka-render {
+  position: relative; margin-top: clamp(2.6rem, 5vw, 4.2rem);
+  border: 1px solid rgba(243,239,230,0.2);
+  min-height: clamp(13rem, 30vw, 21rem);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1rem; text-align: center; padding: 2rem;
+}
+.evoka-render::after {
+  content: ""; position: absolute; top: 38%; left: 50%;
+  width: 34px; height: 34px; transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid rgba(156,125,81,0.55);
+}
+.evoka-render p {
+  position: relative; z-index: 1; margin-top: 4.5rem;
+  font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(243,239,230,0.55);
+}
+
+/* ---------- interior design team ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.6rem, 3vw, 3rem); }
+.duo__studio {
+  background: var(--paper); border: 1px solid var(--line-soft);
+  padding: clamp(2rem, 3.5vw, 3.2rem);
+  display: flex; flex-direction: column;
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), border-color 0.6s var(--ease);
+}
+.duo__studio:hover { transform: translateY(-6px); box-shadow: 0 30px 56px -34px rgba(28,24,16,0.4); border-color: var(--line); }
+.duo__mark {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.05; letter-spacing: -0.01em;
+  padding-bottom: 1.3rem; margin-bottom: 1.3rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.duo__mark span { display: block; font-size: 0.6rem; font-family: var(--font-sans); font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-mute); margin-top: 0.7rem; }
+.duo__role {
+  font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bronze-deep); margin-bottom: 0.9rem;
+}
+.duo__text { font-size: 0.96rem; line-height: 1.72; color: var(--ink-soft); font-weight: 300; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .koe-intro { grid-template-columns: 1fr; gap: 2.4rem; }
+  .koe-intro__figure { position: static; display: flex; align-items: baseline; gap: 1.8rem; }
+  .koe-intro__num { font-size: clamp(7rem, 18vw, 11rem); }
+  .koe-intro__num-label { margin-top: 0; }
+  .koe-hood { grid-template-columns: 1fr; }
+  .evoka-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .koe-facts { grid-template-columns: 1fr 1fr; }
+  .koe-hood__cats { grid-template-columns: 1fr; }
+  .reach__row { grid-template-columns: 1fr auto; row-gap: 0.7rem; }
+  .reach__track { grid-column: 1 / -1; grid-row: 2; }
+  .hero__meta span + span::before { margin-inline: 0.9rem; width: 1.2rem; }
+  /* the stacked hero actions reach the bottom of the viewport on phones —
+     the centered scroll cue would sit on top of them */
+  .hero--image .hero__scroll { display: none; }
+}

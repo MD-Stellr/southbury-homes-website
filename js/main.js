@@ -337,6 +337,7 @@
     tl.to('.hero__title .line-inner', { yPercent: 0, duration: 1.2, stagger: 0.13 })
       .to('.hero__kicker', { opacity: 1, y: 0, duration: 1.0 }, 0.2)
       .to('.hero .eyebrow', { opacity: 1, y: 0, duration: 0.9 }, 0.25)
+      .to('.hero__meta', { opacity: 1, y: 0, duration: 0.9 }, 0.35)
       .to('.hero__sub', { opacity: 1, y: 0, duration: 0.9 }, 0.45)
       .to('.hero__actions', { opacity: 1, y: 0, duration: 0.9 }, 0.6)
       .to('.hero__scroll', { opacity: 1, duration: 0.8 }, 0.85);
@@ -347,7 +348,7 @@
     /* hero initial states */
     wrapHeroLines();
     gsap.set('.hero__title .line-inner', { yPercent: 110 });
-    gsap.set(['.hero .eyebrow', '.hero__sub', '.hero__actions', '.hero__kicker'], { y: 24 });
+    gsap.set(['.hero .eyebrow', '.hero__meta', '.hero__sub', '.hero__actions', '.hero__kicker'], { y: 24 });
     gsap.set('.hero__scroll', { opacity: 0 });
 
     /* headline line reveals */
@@ -406,8 +407,8 @@
         });
     });
 
-    /* hero parallax + fade on scroll */
-    gsap.to('.hero__video', {
+    /* hero parallax + fade on scroll (.hero__img = image-hero landing pages) */
+    gsap.to('.hero__video, .hero__img', {
       yPercent: 8, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     });
@@ -435,6 +436,17 @@
       });
     });
 
+    /* distance-index bars (neighbourhood "reach" component) —
+       each bar's final width comes from its inline --reach custom property;
+       we only animate scaleX so the CSS width is never touched */
+    gsap.utils.toArray('[data-bar]').forEach(function (bar) {
+      gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' });
+      gsap.to(bar, {
+        scaleX: 1, duration: 1.5, ease: 'power3.inOut',
+        scrollTrigger: { trigger: bar.closest('.reach__row') || bar, start: 'top 90%' }
+      });
+    });
+
     ScrollTrigger.refresh();
   }
 
@@ -453,10 +465,16 @@
     var pre = document.getElementById('preloader');
 
     /* Inner pages omit the preloader entirely — build the scene once fonts
-       are ready (so line-splitting measures the real font) and bail. */
+       are ready (so line-splitting measures the real font) and bail.
+       A landing page may still carry a full .hero (image, not video); play
+       the same entrance the preloader exit would have triggered on home,
+       otherwise the hero title stays parked at its offscreen initial state. */
     if (!pre) {
       var fr = document.fonts ? document.fonts.ready : Promise.resolve();
-      fr.then(buildSceneSafe);
+      fr.then(function () {
+        buildSceneSafe();
+        if (document.querySelector('.hero')) heroIntro();
+      });
       return;
     }
 
