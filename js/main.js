@@ -337,7 +337,6 @@
     tl.to('.hero__title .line-inner', { yPercent: 0, duration: 1.2, stagger: 0.13 })
       .to('.hero__kicker', { opacity: 1, y: 0, duration: 1.0 }, 0.2)
       .to('.hero .eyebrow', { opacity: 1, y: 0, duration: 0.9 }, 0.25)
-      .to('.hero__meta', { opacity: 1, y: 0, duration: 0.9 }, 0.35)
       .to('.hero__sub', { opacity: 1, y: 0, duration: 0.9 }, 0.45)
       .to('.hero__actions', { opacity: 1, y: 0, duration: 0.9 }, 0.6)
       .to('.hero__scroll', { opacity: 1, duration: 0.8 }, 0.85);
@@ -348,7 +347,7 @@
     /* hero initial states */
     wrapHeroLines();
     gsap.set('.hero__title .line-inner', { yPercent: 110 });
-    gsap.set(['.hero .eyebrow', '.hero__meta', '.hero__sub', '.hero__actions', '.hero__kicker'], { y: 24 });
+    gsap.set(['.hero .eyebrow', '.hero__sub', '.hero__actions', '.hero__kicker'], { y: 24 });
     gsap.set('.hero__scroll', { opacity: 0 });
 
     /* headline line reveals */
