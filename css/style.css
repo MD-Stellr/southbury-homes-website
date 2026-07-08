@@ -1182,8 +1182,14 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
 .koe-logo {
   display: block; width: clamp(170px, 18vw, 230px); height: auto;
   margin: 0 auto clamp(1.6rem, 2.8vw, 2.2rem);
+  /* the asset's background is levelled to pure white, so multiply
+     dissolves it into any light section with no visible box */
   mix-blend-mode: multiply;
-  filter: brightness(1.075);
+}
+/* crest above the welcome heading — left-aligned with the section head */
+.koe-logo--crest {
+  width: clamp(200px, 21vw, 260px);
+  margin: 0 0 clamp(1.8rem, 3vw, 2.6rem);
 }
 .siteplan-meta {
   display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
