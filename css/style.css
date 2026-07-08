@@ -1186,6 +1186,18 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
   padding: clamp(1.2rem, 3vw, 2.6rem);
 }
 .siteplan svg { display: block; width: 100%; height: auto; }
+/* real site-plan artwork carries its own printed frame — drop the inner padding */
+.siteplan--photo { padding: 0; }
+.siteplan--photo img { display: block; width: 100%; height: auto; }
+
+/* King Oak community logo — multiply + slight lift melts the cream
+   JPEG background into any light section */
+.koe-logo {
+  display: block; width: clamp(170px, 18vw, 230px); height: auto;
+  margin: 0 auto clamp(1.6rem, 2.8vw, 2.2rem);
+  mix-blend-mode: multiply;
+  filter: brightness(1.075);
+}
 .siteplan-meta {
   display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
   gap: 0.8rem 2rem; margin-top: 1.4rem;
@@ -1214,6 +1226,14 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
 .ph-tile__caption {
   position: absolute; left: 1rem; bottom: 1rem; right: 1rem; z-index: 1;
   font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft);
+}
+/* once a real photo fills the tile, the caption becomes a blurred chip over it */
+.ph-tile--photo::after { display: none; }
+.ph-tile--photo .ph-tile__caption {
+  right: auto; z-index: 2;
+  color: var(--bone); background: rgba(28,27,23,0.55);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  padding: 0.65em 1.05em;
 }
 .ph-tile__caption em { display: block; font-style: normal; color: var(--ink-mute); letter-spacing: 0.12em; margin-top: 0.3rem; }
 
