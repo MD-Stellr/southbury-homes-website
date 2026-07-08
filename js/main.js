@@ -203,6 +203,54 @@
   wireForm('inquiryForm', 'formSuccess');
   wireForm('newsForm', 'newsMsg');
 
+  /* ---------------- Event invitation popup (#evpop) ----------------
+     Opens 4s after every page entry (client request — deliberately no
+     frequency cap). Closes via the X, the scrim, or Escape. Runs in
+     both the full-motion and reduced-motion paths, so it lives here
+     above the reduced-motion early-return. */
+  var evpop = document.getElementById('evpop');
+  if (evpop) {
+    var evLastFocus = null;
+
+    var evOpen = function () {
+      evLastFocus = document.activeElement;
+      evpop.hidden = false;
+      void evpop.offsetHeight; /* flush layout so the entrance transition plays */
+      evpop.classList.add('is-open');
+      document.body.classList.add('evpop-lock');
+      if (lenis) lenis.stop();
+      var btn = evpop.querySelector('.evpop__close');
+      if (btn) btn.focus();
+    };
+
+    var evClose = function () {
+      evpop.classList.remove('is-open');
+      document.body.classList.remove('evpop-lock');
+      if (lenis && !menuOpen) lenis.start();
+      window.setTimeout(function () { evpop.hidden = true; }, 500);
+      if (evLastFocus && evLastFocus.focus) evLastFocus.focus();
+    };
+
+    evpop.querySelectorAll('[data-evpop-close]').forEach(function (el) {
+      el.addEventListener('click', evClose);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !evpop.hidden) evClose();
+    });
+    /* keep keyboard focus inside the dialog while it is open */
+    evpop.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var focusables = evpop.querySelectorAll('button, a[href]');
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    window.setTimeout(evOpen, 4000);
+  }
+
   /* =========================================================
      REDUCED-MOTION / NO-GSAP PATH — everything visible, static
      ========================================================= */
