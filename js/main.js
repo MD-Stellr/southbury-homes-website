@@ -251,6 +251,76 @@
     window.setTimeout(evOpen, 4000);
   }
 
+  /* ---------------- Brochure flipbook (#flipbook) ----------------
+     A real-book page turner: four .book__sheet elements, each with a
+     front and back face. Sheets 0..view-1 carry .is-flipped (rotated
+     -180° onto the left stack); the CSS transition performs the turn.
+     The --tzf/--tzb inline custom properties give each sheet a tiny
+     translateZ so stacked faces never z-fight. Lives above the
+     reduced-motion early-return so the book still works there (the
+     CSS disables the turn animation via prefers-reduced-motion). */
+  var flipbook = document.getElementById('flipbook');
+  if (flipbook) {
+    var bkVolume = flipbook.querySelector('[data-book-volume]');
+    var bkSheets = Array.prototype.slice.call(flipbook.querySelectorAll('.book__sheet'));
+    var bkLabel = flipbook.querySelector('[data-book-label]');
+    var bkPrev = flipbook.querySelector('[data-book-prev]');
+    var bkNext = flipbook.querySelector('[data-book-next]');
+    var bkLabels = ['Cover', 'Pages 2–3', 'Pages 4–5', 'Pages 6–7', 'Back cover'];
+    var bkMax = bkSheets.length;
+    var bkView = 0;
+
+    var bkApply = function () {
+      bkSheets.forEach(function (s, i) { s.classList.toggle('is-flipped', i < bkView); });
+      /* closed covers sit alone — recenter the visible half */
+      bkVolume.classList.toggle('is-closed-front', bkView === 0);
+      bkVolume.classList.toggle('is-closed-back', bkView === bkMax);
+      bkLabel.textContent = bkLabels[bkView];
+      bkPrev.disabled = bkView === 0;
+      bkNext.disabled = bkView === bkMax;
+    };
+    var bkGo = function (delta) {
+      var v = Math.min(bkMax, Math.max(0, bkView + delta));
+      if (v === bkView) return;
+      bkView = v;
+      bkApply();
+    };
+
+    bkPrev.addEventListener('click', function () { bkGo(-1); });
+    bkNext.addEventListener('click', function () { bkGo(1); });
+
+    /* click the right page to turn forward, the left page to turn back */
+    bkVolume.addEventListener('click', function (e) {
+      var r = bkVolume.getBoundingClientRect();
+      bkGo(e.clientX - r.left > r.width / 2 ? 1 : -1);
+    });
+
+    /* arrow keys, only while the book is on screen */
+    var bkVisible = false;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        bkVisible = entries[0].isIntersecting;
+      }).observe(flipbook);
+    }
+    document.addEventListener('keydown', function (e) {
+      if (!bkVisible) return;
+      if (e.key === 'ArrowRight') bkGo(1);
+      else if (e.key === 'ArrowLeft') bkGo(-1);
+    });
+
+    /* swipe on touch screens */
+    var bkTouchX = null;
+    flipbook.addEventListener('touchstart', function (e) { bkTouchX = e.touches[0].clientX; }, { passive: true });
+    flipbook.addEventListener('touchend', function (e) {
+      if (bkTouchX === null) return;
+      var dx = e.changedTouches[0].clientX - bkTouchX;
+      bkTouchX = null;
+      if (Math.abs(dx) > 40) bkGo(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    bkApply();
+  }
+
   /* =========================================================
      REDUCED-MOTION / NO-GSAP PATH — everything visible, static
      ========================================================= */

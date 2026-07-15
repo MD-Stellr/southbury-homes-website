@@ -339,8 +339,53 @@
           </div>
         </div>
 
-        <div class="evoka-render" data-reveal>
-          <p>Evoka interior renderings &mdash; arriving soon</p>
+        <div class="evoka-gallery">
+          <div class="evoka-gallery__row">
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-kitchen-02.jpg" alt="Kitchen with grand oak island, marble range wall, and brass globe pendants" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">The Kitchen</figcaption>
+            </figure>
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-living-01.jpg" alt="Open living and dining room with oval dining table, sculptural bronze pendants, and linear fireplace" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">Living &amp; Dining</figcaption>
+            </figure>
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-living-03.jpg" alt="Living room with modular sofa, marble-surround fireplace, and lit millwork shelving" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">The Living Room</figcaption>
+            </figure>
+          </div>
+          <figure class="evoka-gallery__item evoka-gallery__item--wide">
+            <div class="evoka-gallery__media" data-img-reveal>
+              <img src="assets/img/king-oak-living-04.jpg" alt="Full-width oak millwork wall with linear fireplace, integrated shelving, and framed art" width="2400" height="1350" loading="lazy" />
+            </div>
+            <figcaption class="evoka-gallery__caption">Custom Millwork &amp; Linear Fireplace</figcaption>
+          </figure>
+          <div class="evoka-gallery__row">
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-kitchen-01.jpg" alt="Built-in breakfast banquette framed by lit oak shelving" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">The Breakfast Nook</figcaption>
+            </figure>
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-kitchen-03.jpg" alt="Open kitchen with curved oak island, marble hood, and full-height cabinetry" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">The Open Kitchen</figcaption>
+            </figure>
+            <figure class="evoka-gallery__item">
+              <div class="evoka-gallery__media" data-img-reveal>
+                <img src="assets/img/king-oak-living-02.jpg" alt="Bronze mesh screen partitions dividing the living and dining areas" width="1600" height="2000" loading="lazy" />
+              </div>
+              <figcaption class="evoka-gallery__caption">Bronze Screen Detail</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -372,13 +417,59 @@
     </section>
 
     <!-- ============ BROCHURE ============ -->
-    <section class="section feature--alt" id="brochure" style="padding-block: clamp(3rem, 5vw, 5rem);">
+    <section class="section feature--alt" id="brochure">
       <div class="wrap">
-        <div class="coming-state" data-reveal>
-          <p class="eyebrow eyebrow--center">The Brochure</p>
-          <h3>Currently at press.</h3>
-          <p>The King Oak Estates digital brochure — plans, features, and finishes — is being finalized. Registrants receive it first, the moment it is released.</p>
-          <a href="#register" class="link-underline" data-scroll-link>Register to receive it<span class="link-arrow" aria-hidden="true">→</span></a>
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>The Brochure</p>
+          <h2 class="h-display" data-lines>Take a look <em>inside.</em></h2>
+          <p class="section-head__lead" data-reveal>Turn the pages of the King Oak Estates brochure &mdash; the community, the residences, and the neighbourhood, exactly as printed.</p>
+        </header>
+
+        <div class="book" id="flipbook" data-reveal>
+          <div class="book__stage">
+            <div class="book__volume" data-book-volume>
+              <div class="book__sheet" style="--tzf:2.4px; --tzb:0.6px;">
+                <div class="book__face book__face--front">
+                  <img src="assets/img/brochure/cover.jpg" alt="Brochure cover — Now selling, starting in the mid $1.4 million" width="933" height="1400" />
+                </div>
+                <div class="book__face book__face--back">
+                  <img src="assets/img/brochure/s1-l.jpg" alt="Only 8 will ever call it home — community overview and site plan" width="914" height="1400" loading="lazy" />
+                </div>
+              </div>
+              <div class="book__sheet" style="--tzf:1.8px; --tzb:1.2px;">
+                <div class="book__face book__face--front">
+                  <img src="assets/img/brochure/s1-r.jpg" alt="Interior renderings of the kitchen and living spaces" width="914" height="1400" loading="lazy" />
+                </div>
+                <div class="book__face book__face--back">
+                  <img src="assets/img/brochure/s2-l.jpg" alt="Every square foot, designed with intention" width="914" height="1400" loading="lazy" />
+                </div>
+              </div>
+              <div class="book__sheet" style="--tzf:1.2px; --tzb:1.8px;">
+                <div class="book__face book__face--front">
+                  <img src="assets/img/brochure/s2-r.jpg" alt="Living room millwork wall with linear fireplace" width="914" height="1400" loading="lazy" />
+                </div>
+                <div class="book__face book__face--back">
+                  <img src="assets/img/brochure/s3-l.jpg" alt="Custom millwork with integrated shelving" width="914" height="1400" loading="lazy" />
+                </div>
+              </div>
+              <div class="book__sheet" style="--tzf:0.6px; --tzb:2.4px;">
+                <div class="book__face book__face--front">
+                  <img src="assets/img/brochure/s3-r.jpg" alt="Your neighbourhood — trails, lakes, golf, schools, and transit" width="914" height="1400" loading="lazy" />
+                </div>
+                <div class="book__face book__face--back">
+                  <img src="assets/img/brochure/back.jpg" alt="Back cover — register at southburyhomes.com" width="933" height="1400" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="book__controls">
+            <button class="book__arrow" type="button" data-book-prev aria-label="Previous page">&larr;</button>
+            <p class="book__count" data-book-label aria-live="polite">Cover</p>
+            <button class="book__arrow" type="button" data-book-next aria-label="Next page">&rarr;</button>
+          </div>
+          <p class="book__download">
+            <a href="assets/king-oak-brochure.pdf" class="link-underline" download>Download the brochure<span class="link-arrow" aria-hidden="true">&rarr;</span></a>
+          </p>
         </div>
       </div>
     </section>

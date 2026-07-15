@@ -1050,6 +1050,81 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
 .coming-state p { color: var(--ink-soft); font-weight: 300; max-width: 50ch; margin-inline: auto; }
 .coming-state .link-underline { margin-top: 1.8rem; }
 
+/* ---------- brochure flipbook ---------- */
+.book { margin-top: clamp(2.4rem, 5vw, 4rem); }
+.book__stage {
+  perspective: 2800px;
+  display: flex; justify-content: center;
+  padding-block: clamp(0.5rem, 2vw, 1.5rem);
+}
+.book__volume {
+  position: relative;
+  width: min(100%, 780px);
+  aspect-ratio: 1828 / 1400;
+  transform-style: preserve-3d;
+  transition: transform 0.9s var(--ease);
+  cursor: pointer;
+}
+.book__volume.is-closed-front { transform: translateX(-25%); }
+.book__volume.is-closed-back { transform: translateX(25%); }
+.book__sheet {
+  position: absolute; top: 0; left: 50%;
+  width: 50%; height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--tzf));
+  transition: transform 1.15s cubic-bezier(0.4, 0.05, 0.3, 1);
+}
+.book__sheet.is-flipped { transform: translateZ(var(--tzb)) rotateY(-180deg); }
+.book__face {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  background: var(--paper);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* pages carry their own shadow (a filter on .book__volume would
+     flatten its 3D context and break the sheet stacking order) */
+  box-shadow: 0 18px 38px rgba(31, 27, 22, 0.22);
+}
+.book__face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* spine shading — pages darken subtly toward the gutter */
+.book__face::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+}
+.book__face--front::after {
+  background: linear-gradient(90deg, rgba(31,27,22,0.18), rgba(31,27,22,0) 12%);
+}
+.book__face--back {
+  transform: rotateY(180deg);
+}
+.book__face--back::after {
+  background: linear-gradient(-90deg, rgba(31,27,22,0.18), rgba(31,27,22,0) 12%);
+}
+.book__controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  margin-top: clamp(1.4rem, 3vw, 2rem);
+}
+.book__arrow {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: transparent; color: var(--ink);
+  font-size: 1.05rem; cursor: pointer;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+.book__arrow:hover:not(:disabled) { background: var(--bronze); border-color: var(--bronze); color: var(--bone); }
+.book__arrow:disabled { opacity: 0.25; cursor: default; }
+.book__count {
+  min-width: 8ch; text-align: center;
+  font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.book__download { text-align: center; margin-top: 1.6rem; }
+@media (prefers-reduced-motion: reduce) {
+  .book__volume, .book__sheet { transition: none; }
+}
+
 /* ---------- MAP BLOCK (static; no third-party iframe) ---------- */
 .map-block {
   position: relative; overflow: hidden;
@@ -1295,21 +1370,24 @@ section[id], .section[id], [data-anchor] { scroll-margin-top: 92px; }
   margin-bottom: 0.8rem; letter-spacing: -0.01em; color: var(--bone);
 }
 .evoka-item__body { font-size: 0.95rem; line-height: 1.72; color: rgba(243,239,230,0.66); font-weight: 300; }
-.evoka-render {
-  position: relative; margin-top: clamp(2.6rem, 5vw, 4.2rem);
-  border: 1px solid rgba(243,239,230,0.2);
-  min-height: clamp(13rem, 30vw, 21rem);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 1rem; text-align: center; padding: 2rem;
+.evoka-gallery {
+  margin-top: clamp(2.6rem, 5vw, 4.2rem);
+  display: grid; gap: clamp(1.4rem, 3vw, 2.6rem);
 }
-.evoka-render::after {
-  content: ""; position: absolute; top: 38%; left: 50%;
-  width: 34px; height: 34px; transform: translate(-50%, -50%) rotate(45deg);
-  border: 1px solid rgba(156,125,81,0.55);
+.evoka-gallery__row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
 }
-.evoka-render p {
-  position: relative; z-index: 1; margin-top: 4.5rem;
-  font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(243,239,230,0.55);
+.evoka-gallery__item { margin: 0; }
+.evoka-gallery__media { overflow: hidden; aspect-ratio: 4 / 5; }
+.evoka-gallery__item--wide .evoka-gallery__media { aspect-ratio: 16 / 9; }
+.evoka-gallery__media img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+.evoka-gallery__caption {
+  margin-top: 0.9rem;
+  font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(243,239,230,0.55);
 }
 
 /* ---------- interior design team ---------- */
@@ -1465,6 +1543,7 @@ body.evpop-lock { overflow: hidden; }
 }
 @media (max-width: 760px) {
   .koe-facts { grid-template-columns: 1fr 1fr; }
+  .evoka-gallery__row { grid-template-columns: 1fr; gap: 1.6rem; }
   .koe-hood__cats { grid-template-columns: 1fr; }
   .reach__row { grid-template-columns: 1fr auto; row-gap: 0.7rem; }
   .reach__track { grid-column: 1 / -1; grid-row: 2; }
